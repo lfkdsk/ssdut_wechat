@@ -3,7 +3,7 @@
  */
 $(document).ready(function () {
 
-    var start_dir = '/SSDUT-Wechat/public/',
+    var start_dir = '',
         former_route = '',
         page_stack = [];
 
