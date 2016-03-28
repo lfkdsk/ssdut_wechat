@@ -1,0 +1,44 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;ssdut_wechat&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../github.com" />
+      <root url="file://$PROJECT_DIR$/../LiveServer" />
+      <root url="file://$PROJECT_DIR$/../.DS_Store" />
+      <root url="file://$PROJECT_DIR$/../JustServer" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="file://$PROJECT_DIR$/../github.com/kr/pretty/.git" />
+      <root url="file://$PROJECT_DIR$/../JustServer/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/lfkdsk/JustServer/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/smartystreets/goconvey/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/lfkdsk/JustServer/.idea" />
+      <root url="file://$PROJECT_DIR$/../JustServer/.idea" />
+      <root url="file://$PROJECT_DIR$/../github.com/bitly/go-simplejson/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/go-sql-driver/mysql/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/bmizerany/assert/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/jtolds/gls/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/astaxie/beego/.git" />
+      <root url="file://$PROJECT_DIR$/../LiveServer/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/kylelemons/gousb/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/lib/pq/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/name5566/leaf/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/golang/protobuf/protoc-gen-go/testdata" />
+      <root url="file://$PROJECT_DIR$/../github.com/golang/protobuf/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/astaxie/beego/utils/testdata" />
+      <root url="file://$PROJECT_DIR$/../github.com/astaxie/beego/.github" />
+      <root url="file://$PROJECT_DIR$/../github.com/smartystreets/assertions/internal/oglemock/generate/testdata" />
+      <root url="file://$PROJECT_DIR$/../github.com/beego/bee/testdata" />
+      <root url="file://$PROJECT_DIR$/../github.com/golang/protobuf/proto/testdata" />
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://$PROJECT_DIR$/../github.com/lfkdsk/Logger/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/kr/text/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/smartystreets/assertions/internal/oglemock/createmock/testdata" />
+      <root url="file://$PROJECT_DIR$/../github.com/lfkdsk/Logger/.idea" />
+      <root url="file://$PROJECT_DIR$/../github.com/howeyc/fsnotify/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/beego/bee/.git" />
+      <root url="file://$PROJECT_DIR$/../github.com/smartystreets/assertions/.git" />
+    </excluded>
+  </library>
+</component>
