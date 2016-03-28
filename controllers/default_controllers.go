@@ -8,14 +8,10 @@ type Controller struct {
 	beego.Controller
 }
 
-func (c *Controller) Get() {
+func (c *Controller)Index() {
 	c.TplName = "index.html"
 }
 
-type MainController struct {
-	beego.Controller
-}
-
-func (c *MainController)Get()  {
+func (c *Controller)Main() {
 	c.TplName = "main.html"
 }
