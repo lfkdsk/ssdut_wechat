@@ -16,10 +16,10 @@ func (c *Controller)Main() {
 	c.TplName = "main.html";
 }
 
-func (c *Controller)Content() {
-	if c.Ctx.Input.Param(":id") == "" {
-		c.TplName = "content/content.html";
-	}else {
-		c.TplName = "content/" + c.Ctx.Input.Param(":id") + ".html";
-	}
+type ContentController struct {
+	beego.Controller
+}
+
+func (c *ContentController)Content() {
+	c.TplName = "content/" + c.Ctx.Input.Param(":id");
 }

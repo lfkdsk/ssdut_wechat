@@ -8,6 +8,6 @@ import (
 func init() {
 
 	beego.AutoRouter(&controllers.Controller{})
-	beego.Router("content/?:id",&controllers.Controller{},
+	beego.Router("content/?:id", &controllers.ContentController{},
 		"*:Content")
 }
