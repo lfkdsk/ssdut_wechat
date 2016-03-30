@@ -13,11 +13,36 @@ body {
 
 header {
     position: fixed;
-    padding: 10px 0;
     width: 100%;
     background: #1e2127;
     color: #EEEEEE;
     z-index: 999;
+}
+
+nav {
+    font-size: 20px;
+}
+
+nav i {
+    padding: 15px 20px;
+    float: left;
+}
+
+nav span {
+    padding: 11px 20px;
+    float: left;
+}
+
+nav i + span {
+    border-left: 1px solid #aaaaaa;
+}
+
+nav i {
+    cursor: pointer;
+}
+
+nav i:hover {
+    opacity: 0.8;
 }
 
 section {
@@ -37,7 +62,7 @@ form h3 {
     color: #ffffff;
 }
 
-form button, form input, form label {
+form button, form label {
     width: 80% !important;
     min-width: 200px;
 }
@@ -46,15 +71,26 @@ section form {
     position: absolute;
     margin-left: -17.5%;
     margin-top: -115px;
-    padding: 10px;
+    padding: 40px 10px;
     width: 35%;
     text-align: center;
     top: 50%;
     left: 50%;
-    min-width: 220px;
     min-height: 230px;
     border-radius: 5px;
     box-shadow: 5px 5px #222222;
     background: #434857 repeat 0 0;
 }
 
+@media all and (max-width: 628px) {
+    section form {
+        position: relative;
+        width: 100%;
+        top: 25%;
+        left: 0;
+        margin: auto;
+        background: #252830 repeat 0 0;
+        box-shadow: 0 0;
+        border-radius: 0;
+    }
+}
