@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+header {
+    position: fixed;
+    padding: 10px 0;
+    width: 100%;
+    background: #1e2127;
+    color: #EEEEEE;
+    z-index: 999;
+}
+
+section {
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    height: 100%;
+    background: #252830;
+    z-index: 2;
+}
+
+form h3, form button {
+    text-align: center !important;
+}
+
+form h3 {
+    color: #ffffff;
+}
+
+form button, form input, form label {
+    width: 80% !important;
+    min-width: 200px;
+}
+
+section form {
+    position: absolute;
+    margin-left: -17.5%;
+    margin-top: -115px;
+    padding: 10px;
+    width: 35%;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    min-width: 220px;
+    min-height: 230px;
+    border-radius: 5px;
+    box-shadow: 5px 5px #222222;
+    background: #434857 repeat 0 0;
+}
+

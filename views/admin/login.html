@@ -5,8 +5,39 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
     <meta name="viewport" content="width=device-width">
     <title>登录</title>
+    <link rel="stylesheet" href="../../static/js/vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/js/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../static/css/main.css">
+    <link rel="stylesheet" href="../../static/css/admin.css">
+    <script src="../../static/js/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="../../static/js/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../static/js/login.js"></script>
 </head>
 <body>
+    <header>
+        <nav>
+            <i class="fa fa-bars"></i>
+            <span>老朱的内部交易平台</span>
+        </nav>
+    </header>
+    <section>
+        <form action="/admin/login">
+            <h3>登录</h3>
+            <div class="form-group">
+                <label for="username">
+                    <input class="form-control" type="text" id="username" name="username" placeholder="交易用户名">
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="password">
+                    <input class="form-control" type="text" id="password" name="password" placeholder="交易密码">
+                </label>
+            </div>
+            <button class="btn btn-primary btn-lg">登录</button>
+        </form>
+    </section>
+    <footer>
 
+    </footer>
 </body>
 </html>
