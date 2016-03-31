@@ -9,7 +9,6 @@ $(document).ready(function () {
 
         function warning (event) {
             var note = container.find('p');
-            console.log(note);
             note.removeClass('disappear');
             container.find('input').each(function (value, element) {
                 element.value = '';
@@ -38,19 +37,17 @@ $(document).ready(function () {
 
 
         if (back) {
-            console.log('back');
             return;
         }
 
 
         var token,
             host = window.location.host;
-        $.post('', function (data) {
+        $.post('', value['username'], function (data) {
             token = data;
         });
         value['token'] = token;
         value.password  = md5(value.password);
-        console.log(value);
         $.ajax({
             url: '/admin/login',
             type: 'POST',
