@@ -94,3 +94,14 @@ section form {
         border-radius: 0;
     }
 }
+
+.note {
+    display: inline-block;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.disappear {
+    display: none;
+}
