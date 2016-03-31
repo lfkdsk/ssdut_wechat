@@ -7,7 +7,7 @@ $(document).ready(function () {
     $('form button').on('click', function (event) {
         var back = false;
 
-        function warning (event) {
+        function warning(event) {
             var note = container.find('p');
             note.removeClass('disappear');
             container.find('input').each(function (value, element) {
@@ -25,8 +25,7 @@ $(document).ready(function () {
             var type = element.querySelector('input').type,
                 form_value = element.querySelector('input').value;
             if ((!VALID_SIGN.test(form_value) && num === 0)
-                || (form_value.length < 6 && type === 'password'))
-            {
+                || (form_value.length < 6 && type === 'password')) {
                 warning('illegal');
                 legal = false;
                 back = true;
@@ -43,17 +42,17 @@ $(document).ready(function () {
 
         var token,
             host = window.location.host;
-        $.post('', value['username'], function (data) {
+        $.post('/admin/tokenget', value['username'], function (data) {
             token = data;
         });
         value['token'] = token;
-        value.password  = md5(value.password);
+        value.password = md5(value.password);
         $.ajax({
-            url: '/admin/login',
+            url: '/admin/jump',
             type: 'POST',
             data: JSON.stringify(value),
             success: function () {
-                window.location.replace(host + '/admin/index');
+                window.location.replace("http://" + host + '/admin/index');
             },
             error: function () {
                 warning();
