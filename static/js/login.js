@@ -53,7 +53,7 @@ $(document).ready(function () {
             type: 'POST',
             data: JSON.stringify(value),
             success: function () {
-                window.location = host + '/admin/index';
+                window.location.replace(host + '/admin/index');
             },
             error: function () {
                 warning();

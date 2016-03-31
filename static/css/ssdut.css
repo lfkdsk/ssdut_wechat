@@ -2,7 +2,9 @@
 body {
     height: 100%;
 }
-
+li {
+    float: left;
+}
 a:hover {
     text-decoration: none;
 }
