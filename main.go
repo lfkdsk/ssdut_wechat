@@ -6,6 +6,8 @@ import (
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	_ "ssdut_wechat/models"
+	"ssdut_wechat/models"
+	"fmt"
 )
 
 func init() {
@@ -21,6 +23,13 @@ func init() {
 }
 
 func main() {
+
+	var contents []models.Content;
+
+	contents = models.GetContentItem("about_college");
+
+	fmt.Println(contents)
+
 	beego.Run();
 }
 

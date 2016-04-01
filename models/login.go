@@ -11,9 +11,9 @@ type User struct {
 type Content struct {
 	Id         int `beedb:"PK"`
 	Type       string
-	Istrue     bool
+	Istrue     int
 	Content    string
-	ModifyTime string
+	Modifytime string
 }
 
 func init() {
