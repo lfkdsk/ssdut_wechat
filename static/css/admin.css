@@ -1,13 +1,12 @@
 header {
-    position: fixed;
+    position: relative;
     width: 100%;
-    background: #1e2127;
-    color: #EEEEEE;
-    z-index: 999;
 }
 
 nav {
     font-size: 20px;
+    background: #1e2127;
+    color: #EEEEEE;
 }
 
 nav i {
@@ -67,4 +66,9 @@ nav i:hover {
 
 .nav-sidebar > li > a {
     padding: 5px 20px;
+}
+
+.admin-content {
+    padding: 10px 40px;
+    position: relative;
 }

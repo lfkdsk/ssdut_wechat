@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="nav">
             <i class="fa fa-bars"></i>
             <span>老朱的内部交易平台</span>
         </nav>
@@ -47,11 +47,20 @@
             </div>
 
             <!-- 主页面 -->
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 ">
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 admin-content">
                 <ul class="nav nav-tabs">
-                    <li>当前文章</li>
-                    <li>历史文章</li>
-                    <li>添加文章</li>
+                    <li role="presentation"><a href="javascript:;">管理文章</a></li>
+                    <li role="presentation"><a href="javascript:;">添加文章</a></li>
+                    <li role="presentation" class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle"
+                           data-toggle="dropdown"
+                           role="button"
+                        aria-haspopup="true"
+                        aria-expanded="false">设置</a>
+                        <ul class="dropdown-menu">
+                            <li>显示历史文章</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
 
