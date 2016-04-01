@@ -4,6 +4,36 @@
 $(document).ready(function () {
     var VALID_SIGN = /^([a-z]|[A-Z]|[0-9]|_){1,20}$/;
 
+    function Container (container) {
+        this.container = container;
+    }
+
+    Container.prototype.setDisable = function () {
+        var $container = this.container;
+        var $input = $container.find('input');
+        var $button = $container.find('button');
+        $input.each(function (value, element) {
+            element.setAttribute('disabled', '');
+        });
+
+        $button.each(function (value, element) {
+            element.setAttribute('disabled', '');
+        });
+    };
+
+    Container.prototype.removeDisable = function () {
+        var $input = this.container.find('input');
+        var $button = this.container.find('button');
+
+        $input.each(function (value, element) {
+            element.removeAttribute('disabled');
+        });
+
+        $button.each(function (value, element) {
+            element.removeAttribute('disabled');
+        });
+    };
+
     $('form button').on('click', function (event) {
         var back = false;
 
@@ -15,14 +45,17 @@ $(document).ready(function () {
             })
         }
 
+
+
         event.preventDefault();
-        var container = $('form'),
+        var container = new Container($('form')),
             value = {},
             legal = true,
             form = $('form .form-group');
+        container.setDisable();
 
         form.each(function (num, element) {
-            var type = element.querySelector('input').type,
+            var type = element.querySelector('input').id,
                 form_value = element.querySelector('input').value;
             if ((!VALID_SIGN.test(form_value) && num === 0)
                 || (form_value.length < 6 && type === 'password')) {
@@ -36,6 +69,7 @@ $(document).ready(function () {
 
 
         if (back) {
+            container.removeDisable();
             return;
         }
 
@@ -51,11 +85,18 @@ $(document).ready(function () {
             url: '/admin/jump',
             type: 'POST',
             data: JSON.stringify(value),
-            success: function () {
-                window.location.replace("http://" + host + '/admin/index');
+            success: function (response) {
+                if (parseInt(response)) {
+                    window.location.replace("http://" + host + '/admin/index');
+                    return;
+                }
+                console.error('error');
+                warning();
+                container.removeDisable();
             },
             error: function () {
                 warning();
+                container.removeDisable();
             }
         });
     });
