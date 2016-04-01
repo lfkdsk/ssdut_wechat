@@ -40,12 +40,11 @@ func (this *ContentController)TokenGet() {
 	token := models.GetToken(username);
 	fmt.Println(username);
 	fmt.Println(token);
-	models.Bm.Put(username, token, 60);
+	err := models.Bm.Put(username, token, 60 * 1e9);
 
-	if models.Bm.IsExist(username) {
-		fmt.Println("fuck");
+	if err != nil {
+		fmt.Println("put value error")
 	}
-
 
 	this.Ctx.WriteString(token);
 	return
@@ -78,23 +77,10 @@ func (this *LoginController)Jump() {
 		this.Ctx.WriteString("fuck find");
 		return
 	}else {
-		//token := request.Form["token"][0];
+		token := request.Form["token"][0];
 		psw := request.Form["password"][0];
-
-		//fmt.Println("token " + token + " stoken " +
-		//reflect.ValueOf(models.Bm.Get(username)).Elem().Field(0).String());
-
-		fmt.Println(username);
-
-
-		if models.Bm.IsExist(username) {
-			fmt.Println("fuck");
-		}
-
-
-		fmt.Println("psw " + psw + " spsw " + user.Psw);
-
-		if (user.Psw == psw) {
+		
+		if (user.Psw == psw && token == models.Bm.Get(username)) {
 			this.Ctx.WriteString("1");
 			this.Ctx.Redirect(302, "/admin/index");
 		} else {
