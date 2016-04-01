@@ -38,7 +38,7 @@ $(document).ready(function () {
         var back = false;
 
         function warning(event) {
-            var note = container.find('p');
+            var note = container.container.find('p');
             note.removeClass('disappear');
             container.find('input').each(function (value, element) {
                 element.value = '';
