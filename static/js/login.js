@@ -4,7 +4,7 @@
 $(document).ready(function () {
     var VALID_SIGN = /^([a-z]|[A-Z]|[0-9]|_){1,20}$/;
 
-    function Container (container) {
+    function Container(container) {
         this.container = container;
     }
 
@@ -46,7 +46,6 @@ $(document).ready(function () {
         }
 
 
-
         event.preventDefault();
         var container = new Container($('form')),
             value = {},
@@ -74,15 +73,17 @@ $(document).ready(function () {
         }
 
 
-        var confirm_token = {username: value['username']},
+        var token,
+            confirm_token = {username: value['username']},
             host = window.location.host;
-        $.post('/admin/tokenget', JSON.stringify(confirm_token), function (data) {
-            value.token = data;
+        $.post('/admin/tokenget', confirm_token, function (data) {
+            token = data;
+            value['token'] = token;
             value.password = md5(value.password);
             $.ajax({
                 url: '/admin/jump',
                 type: 'POST',
-                data: JSON.stringify(value),
+                data: value,
                 success: function (response) {
                     if (parseInt(response)) {
                         window.location.replace("http://" + host + '/admin/index');
@@ -97,7 +98,5 @@ $(document).ready(function () {
                 }
             });
         });
-
-
     });
 });
