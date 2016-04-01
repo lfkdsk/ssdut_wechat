@@ -6,8 +6,6 @@ import (
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	_ "ssdut_wechat/models"
-	"ssdut_wechat/models"
-	"fmt"
 )
 
 func init() {
@@ -19,16 +17,11 @@ func init() {
 
 	orm.RegisterDataBase("default", "mysql", "root:19960206A@/defa?charset=utf8");
 
-	//orm.RunSyncdb("default", false, true);
 }
 
 func main() {
-
-	var contents []models.Content;
-
-	contents = models.GetContentItem("about_college");
-
-	fmt.Println(contents)
+	o := orm.NewOrm();
+	o.Using("Content");
 
 	beego.Run();
 }

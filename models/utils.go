@@ -29,3 +29,13 @@ func GetContentItem(typename string) []Content {
 	}
 }
 
+func UpdateContentItem(content *Content) {
+	o := orm.NewOrm();
+	o.Using("Content");
+	num, err := o.Update(content);
+	if err != nil {
+		fmt.Println(err);
+	}else {
+		fmt.Println("update" + string(num));
+	}
+}
