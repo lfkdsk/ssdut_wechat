@@ -11,21 +11,16 @@ import (
 func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 
-	orm.RegisterDataBase("default", "mysql", "root:19960206A@/defa?charset=utf8")
+	orm.RegisterDataBase("User", "mysql", "root:19960206A@/defa?charset=utf8");
 
-	orm.RegisterDataBase("User", "mysql", "root:19960206A@/defa?charset=utf8")
+	orm.RegisterDataBase("Content", "mysql", "root:19960206A@/defa?charset=utf8");
 
-	orm.RunSyncdb("default", false, true)
+	orm.RegisterDataBase("default", "mysql", "root:19960206A@/defa?charset=utf8");
+
+	//orm.RunSyncdb("default", false, true);
 }
 
 func main() {
-
-	//o := orm.NewOrm();
-	//
-	//o.Using("User");
-	//
-
-
 	beego.Run();
 }
 

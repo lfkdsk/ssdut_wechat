@@ -8,9 +8,13 @@ type User struct {
 	Psw  string
 }
 
-var User_Token map[string]string;
+type Content struct {
+	Id      int `beedb:"PK"`
+	Type    string
+	Istrue  bool
+	Content string
+}
 
 func init() {
-	orm.RegisterModel(new(User))
-	User_Token = make(map[string]string);
+	orm.RegisterModel(new(User), new(Content));
 }

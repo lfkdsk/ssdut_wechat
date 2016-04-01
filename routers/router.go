@@ -10,6 +10,7 @@ func init() {
 	beego.AutoRouter(&controllers.Controller{});
 
 	beego.Router("/", &controllers.ContentController{});
+
 	beego.Router("/content/?:id",
 		&controllers.ContentController{},
 		"*:Content");
@@ -23,6 +24,7 @@ func init() {
 	beego.Router("/admin/jump",
 		&controllers.LoginController{},
 		"post:Jump")
+
 	beego.Router("/admin/index",
 		&controllers.LoginController{},
 		"*:Admin_Index");
