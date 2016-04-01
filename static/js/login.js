@@ -40,7 +40,7 @@ $(document).ready(function () {
         function warning(event) {
             var note = container.container.find('p');
             note.removeClass('disappear');
-            container.find('input').each(function (value, element) {
+            container.container.find('input').each(function (value, element) {
                 element.value = '';
             })
         }
@@ -53,7 +53,7 @@ $(document).ready(function () {
             legal = true,
             form = $('form .form-group');
         container.setDisable();
-
+        console.log(container);
         form.each(function (num, element) {
             var type = element.querySelector('input').id,
                 form_value = element.querySelector('input').value;
