@@ -12,3 +12,4 @@ func GetToken(username string) string {
 	h.Write([]byte(username + string(current_time)));
 	return hex.EncodeToString(h.Sum(nil));
 }
+

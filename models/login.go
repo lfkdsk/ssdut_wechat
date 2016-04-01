@@ -9,10 +9,11 @@ type User struct {
 }
 
 type Content struct {
-	Id      int `beedb:"PK"`
-	Type    string
-	Istrue  bool
-	Content string
+	Id         int `beedb:"PK"`
+	Type       string
+	Istrue     bool
+	Content    string
+	ModifyTime string
 }
 
 func init() {

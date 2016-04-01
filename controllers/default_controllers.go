@@ -38,9 +38,15 @@ func (this *ContentController)TokenGet() {
 	request.ParseForm();
 	username := request.Form["username"][0];
 	token := models.GetToken(username);
-	fmt.Print(username);
+	fmt.Println(username);
 	fmt.Println(token);
 	models.Bm.Put(username, token, 60);
+
+	if models.Bm.IsExist(username) {
+		fmt.Println("fuck");
+	}
+
+
 	this.Ctx.WriteString(token);
 	return
 }
@@ -78,7 +84,13 @@ func (this *LoginController)Jump() {
 		//fmt.Println("token " + token + " stoken " +
 		//reflect.ValueOf(models.Bm.Get(username)).Elem().Field(0).String());
 
-		fmt.Println(models.Bm.Get(username));
+		fmt.Println(username);
+
+
+		if models.Bm.IsExist(username) {
+			fmt.Println("fuck");
+		}
+
 
 		fmt.Println("psw " + psw + " spsw " + user.Psw);
 
