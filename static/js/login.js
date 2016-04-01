@@ -91,7 +91,6 @@ $(document).ready(function () {
                     window.location.replace("http://" + host + '/admin/index');
                     return;
                 }
-                console.error('error');
                 warning();
                 container.removeDisable();
             },
