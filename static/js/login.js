@@ -75,8 +75,9 @@ $(document).ready(function () {
 
 
         var token,
+            confirm_token = {username: value['username']},
             host = window.location.host;
-        $.post('/admin/tokenget', value['username'], function (data) {
+        $.post('/admin/tokenget', JSON.stringify(confirm_token), function (data) {
             token = data;
         });
         value['token'] = token;
