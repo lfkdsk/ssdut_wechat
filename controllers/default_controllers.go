@@ -34,10 +34,18 @@ func (c *ContentController)Get() {
 }
 
 func (this *ContentController)TokenGet() {
-	fmt.Print(this.GetString("username"));
-	token := models.GetToken(this.GetString("username"));
+	request := this.Ctx.Request;
+	request.ParseForm();
+	username := request.Form["username"][0];
+	token := models.GetToken(username);
+	fmt.Println(username);
 	fmt.Println(token);
-	models.Bm.Put(this.GetString("username"), token, 60);
+	err := models.Bm.Put(username, token, 60 * 1e9);
+
+	if err != nil {
+		fmt.Println("put value error")
+	}
+
 	this.Ctx.WriteString(token);
 	return
 }
@@ -58,19 +66,22 @@ func (this *LoginController)Jump() {
 	o := orm.NewOrm();
 	o.Using("User");
 
-	fmt.Println(this.GetString("username"))
-	username := this.GetString("username");
+	request := this.Ctx.Request;
+	request.ParseForm();
+	username := request.Form["username"][0];
 	user := models.User{Name:username};
 	err := o.Read(&user, "Name");
+
 	if err == orm.ErrNoRows {
 		fmt.Println("cannot find him");
-		this.Ctx.WriteString("fuck find")
+		this.Ctx.WriteString("fuck find");
 		return
 	}else {
-		token := this.GetString("token");
-		psw := this.GetString("password");
-		if (user.Psw == psw &&
-		models.Bm.Get(username) == token) {
+		token := request.Form["token"][0];
+		psw := request.Form["password"][0];
+		
+		if (user.Psw == psw && token == models.Bm.Get(username)) {
+			this.Ctx.WriteString("1");
 			this.Ctx.Redirect(302, "/admin/index");
 		} else {
 			this.Ctx.WriteString("fuck psw");

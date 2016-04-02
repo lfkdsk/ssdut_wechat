@@ -3,16 +3,17 @@ package models
 import "github.com/astaxie/beego/orm"
 
 type User struct {
-	Id   int `beedb:"PK"`
+	Id   int `orm:"PK"`
 	Name string
 	Psw  string
 }
 
 type Content struct {
-	Id      int `beedb:"PK"`
-	Type    string
-	Istrue  bool
-	Content string
+	Id         int `orm:"PK"`
+	Type       string
+	Istrue     int
+	Content    string
+	Modifytime string
 }
 
 func init() {

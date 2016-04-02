@@ -17,10 +17,12 @@ func init() {
 
 	orm.RegisterDataBase("default", "mysql", "root:19960206A@/defa?charset=utf8");
 
-	//orm.RunSyncdb("default", false, true);
 }
 
 func main() {
+	o := orm.NewOrm();
+	o.Using("Content");
+
 	beego.Run();
 }
 
