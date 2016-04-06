@@ -1,9 +1,3 @@
-/*global Qiniu */
-/*global plupload */
-/*global FileProgress */
-/*global hljs */
-
-
 $(function () {
     var uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4',
@@ -11,7 +5,7 @@ $(function () {
         container: 'container',
         drop_element: 'container',
         max_file_size: '1000mb',
-        flash_swf_url: 'bower_components/plupload/js/Moxie.swf',
+        flash_swf_url: '../static/js/vendor/plupload/js/Moxie.swf',
         dragdrop: true,
         chunk_size: '4mb',
         uptoken_url: "/getfiletoken",

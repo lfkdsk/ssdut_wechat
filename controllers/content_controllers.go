@@ -31,7 +31,7 @@ func (this *ContentController)TokenGet() {
 	err := models.Bm.Put(username, token, 60 * 1e9);
 
 	if err != nil {
-		fmt.Println("put value error")
+		fmt.Println("put value error");
 	}
 
 	this.Ctx.WriteString(token);

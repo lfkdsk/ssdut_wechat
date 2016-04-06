@@ -76,7 +76,7 @@ $(document).ready(function () {
 
         var confirm_token = {username: value['username']},
             host = window.location.host;
-        $.post('/admin/tokenget', JSON.stringify(confirm_token), function (data) {
+        $.post('/admin/tokenget', confirm_token, function (data) {
             value.token = data;
             value.password = md5(value.password);
             $.ajax({
