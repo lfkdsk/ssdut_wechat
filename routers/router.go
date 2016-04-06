@@ -29,6 +29,9 @@ func init() {
 		&controllers.LoginController{},
 		"*:Admin_Index");
 
+	beego.Router("/upload",&controllers.UploadControllers{},
+		"*:UpLoad")
+
 	beego.Router("/upfile",
 		&controllers.UploadControllers{}, "*:UpLoadFile")
 
