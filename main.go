@@ -22,17 +22,12 @@ func init() {
 }
 
 func main() {
-	//o := orm.NewOrm();
-	//o.Using("Content");
-	//
 
 	var cons []models.Content = models.GetContentItem("about_college");
 
 	fmt.Println(cons);
 
 	models.SetItemTrue(&cons[0]);
-
-
 
 	beego.Run();
 }

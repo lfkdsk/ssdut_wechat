@@ -4,7 +4,7 @@
 $(document).ready(function () {
     var VALID_SIGN = /^([a-z]|[A-Z]|[0-9]|_){1,20}$/;
 
-    function Container (container) {
+    function Container(container) {
         this.container = container;
     }
 
@@ -46,7 +46,6 @@ $(document).ready(function () {
         }
 
 
-
         event.preventDefault();
         var container = new Container($('form')),
             value = {},
@@ -82,11 +81,22 @@ $(document).ready(function () {
             $.ajax({
                 url: '/admin/jump',
                 type: 'POST',
-                data: JSON.stringify(value),
+                data: {msg: JSON.stringify(value)},
                 success: function (response) {
                     if (parseInt(response)) {
+                        //$.ajax({
+                        //    url: '/admin/index',
+                        //    type: 'POST',
+                        //    data: {username: value['username']},
+                        //    success: function () {
                         window.location.replace("http://" + host + '/admin/index');
-                        return;
+                        //    },
+                        //    error: function () {
+                        //        warning();
+                        //        container.removeDisable();
+                        //    }
+                        //});
+                        //return;
                     }
                     warning();
                     container.removeDisable();
