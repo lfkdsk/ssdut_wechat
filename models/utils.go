@@ -15,11 +15,14 @@ func GetToken(username string) string {
 	return hex.EncodeToString(h.Sum(nil));
 }
 
+func GetSessionNum(username string) string {
+	return username + string(time.Now().Unix());
+}
+
 func GetContentItem(typename string) []Content {
 	o := orm.NewOrm();
 	var contents []Content;
 	num, err := o.QueryTable("Content").Filter("Type", typename).All(&contents);
-
 	if err != nil {
 		fmt.Println("error in qs" + typename);
 		return nil;
@@ -29,13 +32,46 @@ func GetContentItem(typename string) []Content {
 	}
 }
 
-func UpdateContentItem(content *Content) {
+func UpdateContentItem(content *Content) (int64, error) {
 	o := orm.NewOrm();
 	o.Using("Content");
 	num, err := o.Update(content);
+	return getError(num, err);
+}
+
+func InsertContentItem(content *Content) (int64, error) {
+	o := orm.NewOrm();
+	o.Using("Content");
+	num, err := o.Insert(content);
+	return getError(num, err);
+}
+
+func DeleteContentItem(content *Content) (int64, error) {
+	o := orm.NewOrm();
+	o.Using("Content");
+	num, err := o.Delete(content);
+	return getError(num, err);
+}
+
+func SetItemTrue(content *Content) (int64, error) {
+	o := orm.NewOrm();
+	o.Using("Content");
+	num, err := o.QueryTable("Content").Filter("Type", content.Type).Update(orm.Params{"Istrue":0});
+	if err != nil {
+		return getError(num, err);
+	}else {
+		content.Istrue = 1;
+		number, errol := UpdateContentItem(content);
+		return getError(number, errol);
+	}
+}
+
+func getError(num int64, err error) (int64, error) {
 	if err != nil {
 		fmt.Println(err);
+		return 0, err;
 	}else {
-		fmt.Println("update" + string(num));
+		fmt.Println(string(num));
+		return num, nil;
 	}
 }

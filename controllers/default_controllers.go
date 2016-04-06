@@ -59,7 +59,19 @@ func (c *LoginController)Login() {
 }
 
 func (this *LoginController)Admin_Index() {
-	this.TplName = "admin/index.html";
+	request := this.Ctx.Request;
+	request.ParseForm();
+	username := request.Form["username"];
+	if username != nil {
+		sess := this.GetSession(username[0]);
+		if sess != nil {
+			this.TplName = "admin/index.html";
+		}else {
+			this.Ctx.Redirect(302, "/admin/login");
+		}
+	}else {
+		this.Ctx.Redirect(302, "/admin/login");
+	}
 }
 
 func (this *LoginController)Jump() {
@@ -79,10 +91,12 @@ func (this *LoginController)Jump() {
 	}else {
 		token := request.Form["token"][0];
 		psw := request.Form["password"][0];
-		
+
 		if (user.Psw == psw && token == models.Bm.Get(username)) {
+			this.SetSession(username, models.GetSessionNum(username));
 			this.Ctx.WriteString("1");
-			this.Ctx.Redirect(302, "/admin/index");
+			this.Ctx.Redirect(302, "/admin/index?username:" + username);
+			return
 		} else {
 			this.Ctx.WriteString("fuck psw");
 			return
