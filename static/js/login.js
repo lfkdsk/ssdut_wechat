@@ -84,19 +84,8 @@ $(document).ready(function () {
                 data: {msg: JSON.stringify(value)},
                 success: function (response) {
                     if (parseInt(response)) {
-                        //$.ajax({
-                        //    url: '/admin/index',
-                        //    type: 'POST',
-                        //    data: {username: value['username']},
-                        //    success: function () {
                         window.location.replace("http://" + host + '/admin/index');
-                        //    },
-                        //    error: function () {
-                        //        warning();
-                        //        container.removeDisable();
-                        //    }
-                        //});
-                        //return;
+                        return;
                     }
                     warning();
                     container.removeDisable();
