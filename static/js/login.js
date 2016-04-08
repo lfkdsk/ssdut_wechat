@@ -4,7 +4,7 @@
 $(document).ready(function () {
     var VALID_SIGN = /^([a-z]|[A-Z]|[0-9]|_){1,20}$/;
 
-    function Container(container) {
+    function Container (container) {
         this.container = container;
     }
 
@@ -44,6 +44,7 @@ $(document).ready(function () {
                 element.value = '';
             })
         }
+
 
 
         event.preventDefault();
