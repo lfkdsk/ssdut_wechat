@@ -18,7 +18,7 @@ $(document).ready(function () {
 
 
         for (var i = 0; i < data.length; ++i) {
-            element_data = JSON.parse(data[i]);
+            element_data = JSON.parse(response[i]);
             node += document.createElement('li');
             console.log(node, element_data);
         }
