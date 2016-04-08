@@ -82,7 +82,7 @@ $(document).ready(function () {
             $.ajax({
                 url: '/admin/jump',
                 type: 'POST',
-                data: JSON.stringify(value),
+                data: {msg: JSON.stringify(value)},
                 success: function (response) {
                     if (parseInt(response)) {
                         window.location.replace("http://" + host + '/admin/index');
