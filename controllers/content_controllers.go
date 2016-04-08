@@ -41,11 +41,10 @@ func (this *ContentController)GetHistory() {
 	user_sess := this.GetSession(request.RemoteAddr);
 
 	if user_sess != nil {
-		label_name := request.Form.Get("label");
+		label_name := request.Form["label"][0];
 		contents := models.GetContentItem(label_name);
 		res, err := json.Marshal(contents);
 		fuck_error("gethistory", err);
-		fmt.Println(res);
 		this.Ctx.WriteString(string(res));
 	}
 	return
@@ -69,10 +68,12 @@ func (this *LoginController)Admin_Index() {
 
 	if user_sess != nil {
 		this.TplName = "admin/index.html";
+		return
 	}else {
 		this.Ctx.Redirect(302, "/admin/login");
+		return
 	}
-	return
+
 }
 
 func (this *LoginController)Jump() {
@@ -82,7 +83,6 @@ func (this *LoginController)Jump() {
 	request := this.Ctx.Request;
 	request.ParseForm();
 
-	fmt.Println(request.Form)
 	msg, json_err := simplejson.NewJson(([] byte(request.Form["msg"][0])));
 	fuck_error("json_error", json_err);
 
@@ -114,6 +114,7 @@ func (this *LoginController)Jump() {
 
 	}
 }
+
 
 func fuck_error(error_name string, e error) {
 	if e != nil {

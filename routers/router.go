@@ -29,11 +29,13 @@ func init() {
 		&controllers.LoginController{},
 		"*:Admin_Index");
 
-	beego.Router("/upload",&controllers.UploadControllers{},
+	beego.Router("/upload",
+		&controllers.UploadControllers{},
 		"*:UpLoad");
 
-	beego.Router("/gethistory",&controllers.ContentController{},
-		"put:GetHistory");
+	beego.Router("/gethistory",
+		&controllers.ContentController{},
+		"*:GetHistory");
 
 	beego.Router("/getfiletoken",
 		&controllers.UploadControllers{}, "get:GetFileToken")

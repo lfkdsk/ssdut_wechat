@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     var page_type = 'about_college';
 
-    $.post('/gethistory', page_type, function (response) {
+    $.post('/gethistory', {label: page_type}, function (response) {
         console.log(response);
     })
 });
