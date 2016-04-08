@@ -16,6 +16,8 @@
     <script src="../../static/js/vendor/simple-hotkeys/lib/hotkeys.js"></script>
     <script src="../../static/js/vendor/simple-uploader/lib/uploader.js"></script>
     <script src="../../static/js/vendor/simditor/lib/simditor.js"></script>
+    <script src="../../static/js/vendor/plupload/js/plupload.full.min.js"></script>
+    <script src="../../static/js/vendor/qiniu/dist/qiniu.min.js"></script>
     <script src="../../static/js/admin.js"></script>
 </head>
 <body>
@@ -70,16 +72,26 @@
             </div>
 
             <!-- list -->
-            <div>
-                <ul>
-                    <li></li>
-                </ul>
-            </div>
+            <!--<div class="col-sm-9 col-sm-offset-3 col-md-10">-->
+                <!--<ul>-->
+                    <!--<li class="admin-item">编辑时间：　-->
+                        <!--<button data-to-do="delete" class="btn btn-danger btn-sm">删除</button>-->
+                        <!--<button data-to-do="edit" class="btn btn-success btn-sm">编辑</button>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
 
             <!-- editor -->
             <div class="col-sm-9 col-sm-offset-3 col-md-10">
                 <textarea name="editor" id="editor" placeholder="" autofocus></textarea>
+                <div id="container">
+                    <a id="upload-img" class="btn btn-default btn-lg">
+                        <i class="fa fa-plus"></i>
+                        <span>选择文件</span>
+                    </a>
+                </div>
             </div>
+
         </div>
     </section>
 
@@ -91,5 +103,6 @@
     <footer>
 
     </footer>
+
 </body>
 </html>
