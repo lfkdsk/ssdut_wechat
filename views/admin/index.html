@@ -55,20 +55,35 @@
 
             <!-- 主页面 -->
             <div class="col-sm-9 col-sm-offset-3 col-md-10 admin-content">
-                <ul class="nav nav-tabs">
-                    <li role="presentation"><a href="javascript:;">管理文章</a></li>
-                    <li role="presentation"><a href="javascript:;">添加文章</a></li>
-                    <li role="presentation" class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle"
-                           data-toggle="dropdown"
-                           role="button"
-                        aria-haspopup="true"
-                        aria-expanded="false">设置 <i class="fa fa-sort-desc"></i></a>
-                        <ul class="dropdown-menu">
-                            <li>显示历史文章</li>
-                        </ul>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#editor-article" aria-controls="editor-article" role="tab" data-toggle="tab">管理文章</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#add-article" aria-controls="add-article" role="tab" data-toggle="tab">添加文章</a>
                     </li>
                 </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="editor-article">
+                        <ul>
+                            <li class="admin-item">编辑时间：　
+                                <button data-to-do="delete" class="btn btn-danger btn-sm">删除</button>
+                                <button data-to-do="edit" class="btn btn-success btn-sm">编辑</button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="add-article">
+                        <textarea name="editor" id="editor" placeholder="" autofocus></textarea>
+                        <div id="container">
+                            <a id="upload-img" class="btn btn-default btn-lg">
+                                <i class="fa fa-plus"></i>
+                                <span>选择文件</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- list -->
@@ -83,13 +98,7 @@
 
             <!-- editor -->
             <div class="col-sm-9 col-sm-offset-3 col-md-10">
-                <textarea name="editor" id="editor" placeholder="" autofocus></textarea>
-                <div id="container">
-                    <a id="upload-img" class="btn btn-default btn-lg">
-                        <i class="fa fa-plus"></i>
-                        <span>选择文件</span>
-                    </a>
-                </div>
+
             </div>
 
         </div>
