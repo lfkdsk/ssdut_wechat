@@ -35,7 +35,7 @@
                     <li>
                         <a href="javascript:;" data-go-to="about_school">学校概况</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="javascript:;" data-go-to="about_college">学院概况</a>
                     </li>
                     <li>
@@ -68,8 +68,10 @@
                     <div role="tabpanel" class="tab-pane active" id="editor-article">
                         <ul>
                             <li class="admin-item">编辑时间：　
-                                <button data-to-do="delete" class="btn btn-danger btn-sm">删除</button>
-                                <button data-to-do="edit" class="btn btn-success btn-sm">编辑</button>
+                                <button data-to-do="edit" class="btn btn-success btn-sm"
+                                data-toggle="modal" data-target="#edit-article">编辑</button>
+                                <button data-to-do="delete" class="btn btn-danger btn-sm"
+                                data-toggle="modal" data-target="#delete-article">删除</button>
                             </li>
                         </ul>
                     </div>
@@ -83,22 +85,34 @@
                             </a>
                         </div>
                     </div>
+
+
+                    <!-- 编辑模态框 -->
+                    <div id="edit-article" class="modal fade" role="dialog" tabindex="-1"
+                         aria-labelledby="edit">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- 删除模态框 -->
+                    <div id="delete-article" class="modal fade bs-example-modal-sm" tabindex="-1"
+                         role="dialog" aria-labelledby="delete">
+
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <p>是否删除此条</p>
+                                <button class="btn btn-default"
+                                        data-dismiss="modal">关闭</button>
+                                <button class="btn btn-danger"
+                                        data-dismiss="modal">删除</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <!-- list -->
-            <!--<div class="col-sm-9 col-sm-offset-3 col-md-10">-->
-                <!--<ul>-->
-                    <!--<li class="admin-item">编辑时间：　-->
-                        <!--<button data-to-do="delete" class="btn btn-danger btn-sm">删除</button>-->
-                        <!--<button data-to-do="edit" class="btn btn-success btn-sm">编辑</button>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</div>-->
-
-            <!-- editor -->
-            <div class="col-sm-9 col-sm-offset-3 col-md-10">
-
             </div>
 
         </div>
