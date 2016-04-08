@@ -6,6 +6,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego"
 	"github.com/bitly/go-simplejson"
+	"encoding/json"
 )
 
 type ContentController struct {
@@ -33,6 +34,23 @@ func (this *ContentController)TokenGet() {
 	return
 }
 
+func (this *ContentController)GetHistory() {
+	request := this.Ctx.Request;
+	request.ParseForm();
+
+	user_sess := this.GetSession(request.RemoteAddr);
+
+	if user_sess != nil {
+		label_name := request.Form.Get("label");
+		contents := models.GetContentItem(label_name);
+		res, err := json.Marshal(contents);
+		fuck_error("gethistory", err);
+		fmt.Println(res);
+		this.Ctx.WriteString(string(res));
+	}
+	return
+}
+
 type LoginController struct {
 	beego.Controller
 }
@@ -51,11 +69,10 @@ func (this *LoginController)Admin_Index() {
 
 	if user_sess != nil {
 		this.TplName = "admin/index.html";
-		return
 	}else {
 		this.Ctx.Redirect(302, "/admin/login");
-		return
 	}
+	return
 }
 
 func (this *LoginController)Jump() {

@@ -30,12 +30,13 @@ func init() {
 		"*:Admin_Index");
 
 	beego.Router("/upload",&controllers.UploadControllers{},
-		"*:UpLoad")
+		"*:UpLoad");
 
-	beego.Router("/upfile",
-		&controllers.UploadControllers{}, "*:UpLoadFile")
+	beego.Router("/gethistory",&controllers.ContentController{},
+		"put:GetHistory");
 
 	beego.Router("/getfiletoken",
 		&controllers.UploadControllers{}, "get:GetFileToken")
+
 
 }

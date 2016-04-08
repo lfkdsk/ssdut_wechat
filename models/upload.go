@@ -22,7 +22,6 @@ func init() {
 }
 
 func GetQiNiuToken() string {
-
 	//创建一个Client
 	c := kodo.New(0, nil)
 	//设置上传的策略

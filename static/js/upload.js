@@ -11,17 +11,6 @@ $(function () {
         uptoken_url: "/getfiletoken",
         domain: "http://7xsnz4.com2.z0.glb.qiniucdn.com/",
         get_new_uptoken: false,
-        // downtoken_url: '/downtoken',
-        // unique_names: true,
-        // save_key: true,
-        // x_vars: {
-        //     'id': '1234',
-        //     'time': function(up, file) {
-        //         var time = (new Date()).getTime();
-        //         // do something with 'time'
-        //         return time;
-        //     },
-        // },
         auto_start: true,
         log_level: 5,
         init: {
