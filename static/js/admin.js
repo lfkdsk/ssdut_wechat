@@ -13,15 +13,17 @@ $(document).ready(function () {
         node,
         element_data,
         data;
-    console.log(data[0]);
     $.post('/gethistory', {label: page_type}, function (response) {
+        data = JSON.parse(response);
         for (var i = 0; i < data.length; ++i) {
-            element_data = JSON.parse(response[i]);
+            element_data = data[i];
             var new_li = createNewHistoryList(element_data);
             node.push(new_li);
 
             console.log(node, element_data);
         }
+
+        $('#editor-article').find('ul').html(node);
         historyCallback();
     });
 
