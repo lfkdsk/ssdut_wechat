@@ -67,17 +67,20 @@
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="editor-article">
                         <ul>
-                            <!--<li class="admin-item" data-id="1">编辑时间：　-->
-                                <!--<button data-to-do="edit" class="btn btn-success btn-sm"-->
-                                <!--data-toggle="modal" data-target="#edit-article">编辑</button>-->
-                                <!--<button data-to-do="delete" class="btn btn-danger btn-sm"-->
-                                <!--data-toggle="modal" data-target="#delete-article">删除</button>-->
-                            <!--</li>-->
+                            <li class="admin-content" data-id="1">
+                                编辑时间：
+                                <button class="btn btn-sm btn-success"
+                                        data-target="#update-article" data-toggle="modal"
+                                        data-to-do="update" data-id="1">编辑</button>
+                                <button class="btn btn-sm btn-danger"
+                                        data-target="#delete-article" data-toggle="modal"
+                                        data-to-do="delete" data-id="1">删除</button>
+                            </li>
                         </ul>
                     </div>
 
                     <div role="tabpanel" class="tab-pane" id="add-article">
-                        <textarea name="editor" id="editor" placeholder="" autofocus></textarea>
+                        <textarea name="append" id="append" placeholder="" autofocus></textarea>
                         <div id="container">
                             <a id="upload-img" class="btn btn-default btn-lg">
                                 <i class="fa fa-plus"></i>
@@ -88,11 +91,29 @@
 
 
                     <!-- 编辑模态框 -->
-                    <div id="edit-article" class="modal fade" role="dialog" tabindex="-1"
-                         aria-labelledby="edit">
-                        <div class="modal-dialog">
+                    <div id="update-article" class="modal fade" role="dialog" tabindex="-1"
+                         aria-labelledby="add">
+                        <div class="modal-dialog" role="document">
                             <div class="modal-content">
-
+                                <div class="modal-header">
+                                    <button class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">
+                                            &times;
+                                        </span>
+                                    </button>
+                                    <h4 class="modal-title">编辑</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" placeholder="文章题目"/>
+                                    <textarea name="update" id="update" placeholder="" autofocus></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default"
+                                            data-dismiss="modal">取消</button>
+                                    <button class="btn btn-success"
+                                            data-dismiss="modal">保存</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -104,11 +125,24 @@
 
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
-                                <p>是否删除此条</p>
-                                <button class="btn btn-default"
-                                        data-dismiss="modal">关闭</button>
-                                <button class="btn btn-danger"
-                                        data-dismiss="modal">删除</button>
+                                <div class="modal-header">
+                                    <button class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">
+                                            &times;
+                                        </span>
+                                    </button>
+                                    <h4 class="modal-title"></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>是否删除此条</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default"
+                                            data-dismiss="modal">关闭</button>
+                                    <button class="btn btn-danger"
+                                            data-dismiss="modal">删除</button>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -2,62 +2,82 @@
  * Created by li-rz on 16-3-31.
  */
 $(document).ready(function () {
-    var editor = new Simditor({
-        textarea: $('#editor')
-    });
+
+    var editor = {
+        append: new Simditor({
+            textarea: $('#append')
+        }),
+        update: new Simditor({
+            textarea: $('#update')
+        })
+    };
 
     var page_type = $('ul.nav-sidebar li.active').find('a').get(0).dataset.goTo,
         $element = {},
+        change = {
+            id: null,
+            type: null
+        },
         data,
+        content = {},
         history_ul = document.querySelector('#editor-article ul'),
         new_li;
 
     /**
      * 获取历史列表
      */
-    $.post('/gethistory', {label: page_type}, function (response) {
-    //     data = [{
-    //         Id : 1,
-    //         Type: 'about_college',
-    //         Istrue: 1,
-    //         Content: 'fuck lllllll',
-    //         Modifytime: 'ffff'
-    //     }, {
-    //         Id: 2,
-    //         Type: 'about_college',
-    //         Istrue: 0,
-    //         Content: 'fuck',
-    //         Modifytime: '6666'
-    //     }];
-        data = JSON.parse(response);
-        for (var i = data.length - 1; i >= 0; --i) {
-            new_li = createNewHistoryList(data[i]);
-            if (data[i].Istrue) {
-                history_ul.insertBefore(new_li, history_ul.firstChild);
-            } else {
-                history_ul.appendChild(new_li);
-            }
-        }
+    // $.post('/gethistory', {label: page_type}, function (response) {
+    //     data = JSON.parse(response);
+    //     for (var i = data.length - 1; i >= 0; --i) {
+    //         new_li = createNewHistoryList(data[i]);
+    //         if (data[i].Istrue) {
+    //             history_ul.insertBefore(new_li, history_ul.firstChild);
+    //         } else {
+    //             history_ul.appendChild(new_li);
+    //         }
+    //     }
         historyCallback();
-    });
+    // });
+
 
 
     /**
      * 初始化元素
      */
     function historyCallback () {
-        var $editor = $('#editor-article');
+        var $editor_inbox = $('#editor-article');
 
         $element.editor =
-            $editor.find('li');
+            $editor_inbox.find('li');
 
-        $element.history_list =
-            $editor.find('button[data-to-do="delete"]');
+        $element.update_button =
+            $editor_inbox.find('button[data-to-do="update"]');
 
+        $element.delete_button =
+            $editor_inbox.find('button[data-to-do="delete"]');
 
+        bindEvent();
     }
 
+    /**
+     * 绑定按钮事件
+     */
+    function bindEvent() {
+        function bindEvent(element, type) {
+            $.each(element, function (value, element) {
+                $(element).on('click', function (event) {
+                    var $this = this;
+                    change.id = $this.get(0).dataset.id;
+                    change.type = type;
+                    var value = content[change.id];
+                    editor.update.setValue(value);
+                });
+            });
+        }
 
+        bindEvent($element.update_button, 'update');
+        bindEvent($element.delete_button, 'delete');
+    }
 
     /**
      * 创建历史列表
@@ -67,9 +87,10 @@ $(document).ready(function () {
         var new_li = document.createElement('li');
         var append_element = {
             text : document.createTextNode('编辑时间：' + data.Modifytime),
-            edit_button: createNewHistoryButton('edit'),
-            delete_button: createNewHistoryButton('delete')
+            update_button: createNewHistoryButton('update', data.Id),
+            delete_button: createNewHistoryButton('delete', data.Id)
         };
+        content[data.Id] = data.Content;
 
         for (var i in append_element) {
             if (append_element.hasOwnProperty(i)) {
@@ -84,16 +105,17 @@ $(document).ready(function () {
 
     /**
      * 创建新按钮
-     * @param type (string - edit | delete)
+     * @param type (string - update | delete)
      */
-    function createNewHistoryButton (type) {
+    function createNewHistoryButton (type, target) {
         var new_button = document.createElement('button');
         new_button.dataset.toDo = type;
         new_button.dataset.toggle = 'modal';
         new_button.className = 'btn btn-sm';
+        new_button.dataset.id = target;
         new_button.dataset.target = '#' + type + '-article';
         switch (type) {
-            case 'edit':
+            case 'update':
                 new_button.appendChild(document.createTextNode('编辑'));
                 new_button.className += ' btn-success';
                 break;
@@ -108,4 +130,5 @@ $(document).ready(function () {
 
         return new_button;
     }
+    
 });

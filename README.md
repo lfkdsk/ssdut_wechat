@@ -12,6 +12,8 @@
 |'/upload'|上传图片路径|msg:{username,token,password}|
 |'/gethistory'|获取历史|label类型|
 |'/getfiletoken'|获取文件上传token|---|
-|'index','main'|页面|使用了自动路由|
+|'index','main'|页面 |使用了自动路由|
 
+data type
+>{label: name, code: code_type(update, add, delete)content: {Id: , Type: , Istrue: , Content: ,Modifytime: }}
 ## Check方法
