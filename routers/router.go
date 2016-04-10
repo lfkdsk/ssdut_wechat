@@ -40,5 +40,6 @@ func init() {
 	beego.Router("/getfiletoken",
 		&controllers.UploadControllers{}, "get:GetFileToken")
 
-
+	beego.Router("/execode",
+		&controllers.ContentController{}, "post:ExeCode")
 }

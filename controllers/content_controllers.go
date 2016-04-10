@@ -50,6 +50,31 @@ func (this *ContentController)GetHistory() {
 	return
 }
 
+
+/**
+	{
+		label:name,
+		code:code_type,(update,add,delete)
+		content:{
+			Id         int
+			Type       string
+			Istrue     int
+			Content    string
+			Modifytime string
+		}
+	}
+ */
+func (this *ContentController)ExeCode() {
+	request := this.Ctx.Request;
+	request.ParseForm();
+
+	user_sess := this.GetSession(request.RemoteAddr);
+	if user_sess != nil {
+		fmt.Println(request.Body);
+	}
+	return
+}
+
 type LoginController struct {
 	beego.Controller
 }
@@ -114,7 +139,6 @@ func (this *LoginController)Jump() {
 
 	}
 }
-
 
 func fuck_error(error_name string, e error) {
 	if e != nil {
