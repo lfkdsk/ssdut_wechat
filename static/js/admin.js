@@ -95,7 +95,7 @@ $(document).ready(function () {
                     change.type = type;
                     //console.error(title);
                     var value = content[change.id];
-                    $('#updata-title').val(title[change.id]);
+                    $('#update-title').val(title[change.id]);
                     editor.update.setValue(value);
                 });
             });
