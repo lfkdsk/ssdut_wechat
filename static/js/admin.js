@@ -26,8 +26,29 @@ $(document).ready(function () {
         history_ul = document.querySelector('#editor-article ul'),
         new_li;
 
+    $element.siderbar =
+        $('.nav-sidebar');
+
+
+
     getHistory();
 
+
+    $element.siderbar.find('li').each(function (value, element) {
+        var $element = $(element);
+        $element.on('click', function () {
+            var $former_active = $('ul.nav-sidebar li.active');
+            $former_active.removeClass('active');
+            var $this = $(this);
+            $this.addClass('active');
+            page_type = $former_active.find('a').get(0).dataset.goTo;
+            getHistory();
+        })
+    });
+
+    $('.bars').on('click', function (event) {
+        $('.sidebar').toggleClass('show');
+    });
     /**
      * 获取历史列表
      */
@@ -62,25 +83,10 @@ $(document).ready(function () {
         $element.delete_button =
             $editor_inbox.find('button[data-to-do="delete"]');
 
-        $element.siderbar =
-            $('.nav-sidebar');
+
 
         bindEvent();
 
-        $element.siderbar.find('li').each(function (value, element) {
-            var $element = $(element);
-            $element.on('click', function () {
-                var $former_active = $('ul.nav-sidebar li.active');
-                $former_active.removeClass('active');
-                var $this = $(this);
-                $this.addClass('active');
-                page_type = $former_active.find('a').get(0).dataset.goTo;
-                getHistory();
-            })
-        });
-        $('.bars').on('click', function (event) {
-            $('.sidebar').toggleClass('show');
-        });
     }
 
     /**
