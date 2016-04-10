@@ -90,7 +90,7 @@ $(document).ready(function () {
         function bindEvent(element, type) {
             $.each(element, function (value, element) {
                 $(element).on('click', function (event) {
-                    var $this = this;
+                    var $this = $(this);
                     change.id = $this.get(0).dataset.id;
                     change.type = type;
                     var value = content[change.id];
