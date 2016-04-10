@@ -31,7 +31,7 @@ $(document).ready(function () {
     /**
      * 获取历史列表
      */
-    function getHistory () {
+    function getHistory() {
         $.post('/gethistory', {label: page_type}, function (response) {
             data = JSON.parse(response);
             for (var i = data.length - 1; i >= 0; --i) {
@@ -50,7 +50,7 @@ $(document).ready(function () {
     /**
      * 初始化元素
      */
-    function historyCallback () {
+    function historyCallback() {
         var $editor_inbox = $('#editor-article');
 
         $element.editor =
@@ -93,6 +93,7 @@ $(document).ready(function () {
                     var $this = $(this);
                     change.id = $this.get(0).dataset.id;
                     change.type = type;
+                    //console.error(title);
                     var value = content[change.id];
                     $('#updata-title').val(title[change.id]);
                     editor.update.setValue(value);
@@ -108,18 +109,18 @@ $(document).ready(function () {
      * 创建历史列表
      * @param data (obj)
      */
-    function createNewHistoryList (data) {
+    function createNewHistoryList(data) {
         var new_li = document.createElement('li');
         var append_element = {
-            text : document.createTextNode('编辑时间：' + data.Modifytime),
+            text: document.createTextNode('编辑时间：' + data.Modifytime),
             update_button: createNewHistoryButton('update', data.Id),
             delete_button: createNewHistoryButton('delete', data.Id)
         };
         content[data.Id] = data.Content.replace(TITLE_REGEX, '');
-        title[data.Id] = TITLE_REGEX.exec(data.Content)[1];
+        title[data.Id] = TITLE_REGEX.exec(data.Content)[0].replace(/<.+>(.+)<.+>/, '$1');
         for (var i in append_element) {
             if (append_element.hasOwnProperty(i)) {
-                new_li.appendChild(append_element[i])
+                new_li.appendChild(append_element[i]);
             }
         }
         new_li.dataset.id = data.Id;
@@ -132,7 +133,7 @@ $(document).ready(function () {
      * 创建新按钮
      * @param type (string - update | delete)
      */
-    function createNewHistoryButton (type, target) {
+    function createNewHistoryButton(type, target) {
         var new_button = document.createElement('button');
         new_button.dataset.toDo = type;
         new_button.dataset.toggle = 'modal';
@@ -155,5 +156,5 @@ $(document).ready(function () {
 
         return new_button;
     }
-    
+
 });

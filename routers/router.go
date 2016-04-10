@@ -35,7 +35,7 @@ func init() {
 
 	beego.Router("/gethistory",
 		&controllers.ContentController{},
-		"*:GetHistory");
+		"post:GetHistory");
 
 	beego.Router("/getfiletoken",
 		&controllers.UploadControllers{}, "get:GetFileToken")
