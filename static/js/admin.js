@@ -54,6 +54,10 @@ $(document).ready(function () {
      */
     function getHistory() {
         $.post('/gethistory', {label: page_type}, function (response) {
+            while(history_ul.hasChildNodes()) {
+                history_ul.removeChild(history_ul.firstChild);
+            }
+
             data = JSON.parse(response);
             for (var i = data.length - 1; i >= 0; --i) {
                 new_li = createNewHistoryList(data[i]);
