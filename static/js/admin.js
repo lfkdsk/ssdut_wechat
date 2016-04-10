@@ -12,6 +12,8 @@ $(document).ready(function () {
         })
     };
 
+    const TITLE_REGEX = /<h3>.*<\/h3>/;
+
     var page_type = $('ul.nav-sidebar li.active').find('a').get(0).dataset.goTo,
         $element = {},
         change = {
@@ -20,24 +22,25 @@ $(document).ready(function () {
         },
         data,
         content = {},
+        title = {},
         history_ul = document.querySelector('#editor-article ul'),
         new_li;
 
     /**
      * 获取历史列表
      */
-    // $.post('/gethistory', {label: page_type}, function (response) {
-    //     data = JSON.parse(response);
-    //     for (var i = data.length - 1; i >= 0; --i) {
-    //         new_li = createNewHistoryList(data[i]);
-    //         if (data[i].Istrue) {
-    //             history_ul.insertBefore(new_li, history_ul.firstChild);
-    //         } else {
-    //             history_ul.appendChild(new_li);
-    //         }
-    //     }
+    $.post('/gethistory', {label: page_type}, function (response) {
+        data = JSON.parse(response);
+        for (var i = data.length - 1; i >= 0; --i) {
+            new_li = createNewHistoryList(data[i]);
+            if (data[i].Istrue) {
+                history_ul.insertBefore(new_li, history_ul.firstChild);
+            } else {
+                history_ul.appendChild(new_li);
+            }
+        }
         historyCallback();
-    // });
+    });
 
 
 
@@ -70,6 +73,7 @@ $(document).ready(function () {
                     change.id = $this.get(0).dataset.id;
                     change.type = type;
                     var value = content[change.id];
+                    $('#updata-title').val(title[change.id]);
                     editor.update.setValue(value);
                 });
             });
@@ -90,8 +94,8 @@ $(document).ready(function () {
             update_button: createNewHistoryButton('update', data.Id),
             delete_button: createNewHistoryButton('delete', data.Id)
         };
-        content[data.Id] = data.Content;
-
+        content[data.Id] = data.Content.replace(TITLE_REGEX, '');
+        title[data.Id] = TITLE_REGEX.exec(data.Content)[1];
         for (var i in append_element) {
             if (append_element.hasOwnProperty(i)) {
                 new_li.appendChild(append_element[i])
