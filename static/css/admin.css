@@ -1,18 +1,18 @@
 @keyframes pop {
     0% {
-        -webkit-transform: translate(-100%);
-        -moz-transform: translate(-100%);
-        -ms-transform: translate(-100%);
-        -o-transform: translate(-100%);
-        transform: translate(-100%);
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
+        transform: translateX(-100%);
     }
 
     100% {
-        -webkit-transform: translate(100%);
-        -moz-transform: translate(100%);
-        -ms-transform: translate(100%);
-        -o-transform: translate(100%);
-        transform: translate(100%);
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        -o-transform: translateX(100%);
+        transform: translateX(100%);
     }
 }
 
@@ -59,7 +59,7 @@ nav i:hover {
 
 .show {
     display: block !important;
-    animation: pop 0.5s ease-out 0;
+    animation: pop 1.2s ease-out 0;
 }
 
 @media all and (min-width: 768px) {

@@ -94,7 +94,7 @@ $(document).ready(function () {
                     change.id = $this.get(0).dataset.id;
                     change.type = type;
                     var value = content[change.id];
-                    $('#updata-title').val(title[change.id]);
+                    $('#update-title').val(title[change.id]);
                     editor.update.setValue(value);
                 });
             });
@@ -116,7 +116,7 @@ $(document).ready(function () {
             delete_button: createNewHistoryButton('delete', data.Id)
         };
         content[data.Id] = data.Content.replace(TITLE_REGEX, '');
-        title[data.Id] = TITLE_REGEX.exec(data.Content)[1];
+        title[data.Id] = TITLE_REGEX.exec(data.Content)[0].replace(/<.+>(.+)<.+>/, '$1');
         for (var i in append_element) {
             if (append_element.hasOwnProperty(i)) {
                 new_li.appendChild(append_element[i])
