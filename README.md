@@ -14,6 +14,6 @@
 |'/getfiletoken'|获取文件上传token|---|
 |'index','main'|页面 |使用了自动路由|
 
-data type
+data type /execode
 >{label: name, code: code_type(update, add, delete)content: {Id: , Type: , Istrue: , Content: ,Modifytime: }}
 ## Check方法

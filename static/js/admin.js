@@ -3,52 +3,6 @@
  */
 $(document).ready(function () {
 
-    var editor = {
-        append: new Simditor({
-            textarea: $('#append')
-        }),
-        update: new Simditor({
-            textarea: $('#update')
-        })
-    };
-
-    const TITLE_REGEX = /<h3>.*<\/h3>/;
-
-    var page_type = $('ul.nav-sidebar li.active').find('a').get(0).dataset.goTo,
-        $element = {},
-        change = {
-            id: null,
-            type: null
-        },
-        data,
-        content = {},
-        title = {},
-        history_ul = document.querySelector('#editor-article ul'),
-        new_li;
-
-    $element.siderbar =
-        $('.nav-sidebar');
-
-
-
-    getHistory();
-
-
-    $element.siderbar.find('li').each(function (value, element) {
-        var $element = $(element);
-        $element.on('click', function () {
-            var $former_active = $('ul.nav-sidebar li.active');
-            $former_active.removeClass('active');
-            var $this = $(this);
-            $this.addClass('active');
-            page_type = $former_active.find('a').get(0).dataset.goTo;
-            getHistory();
-        })
-    });
-
-    $('.bars').on('click', function (event) {
-        $('.sidebar').toggleClass('show');
-    });
     /**
      * 获取历史列表
      */
@@ -68,6 +22,25 @@ $(document).ready(function () {
                 }
             }
             historyCallback();
+        });
+    }
+
+    /**
+     * 向服务器发送修改后的数据，并准备回调函数
+     * @param url - 发送的url接口
+     * @param data - 要发送的数据
+     */
+    function sendData (url, data) {
+        $.ajax({
+            url: url,
+            data: data,
+            method: 'POST',
+            error: function () {
+                
+            },
+            success: function () {
+                
+            }
         });
     }
 
@@ -142,6 +115,7 @@ $(document).ready(function () {
     /**
      * 创建新按钮
      * @param type (string - update | delete)
+     * @param target {String} (button data id)
      */
     function createNewHistoryButton(type, target) {
         var new_button = document.createElement('button');
@@ -166,5 +140,55 @@ $(document).ready(function () {
 
         return new_button;
     }
+    
+    var editor = {
+        append: new Simditor({
+            textarea: $('#append')
+        }),
+        update: new Simditor({
+            textarea: $('#update')
+        })
+    };
+
+    const TITLE_REGEX = /<h3>.*<\/h3>/;
+
+    var page_type = $('ul.nav-sidebar li.active').find('a').get(0).dataset.goTo,
+        $element = {},
+        change = {
+            id: null,
+            type: null
+        },
+        data,
+        content = {},
+        title = {},
+        history_ul = document.querySelector('#editor-article ul'),
+        new_li;
+
+    $element.siderbar =
+        $('.nav-sidebar');
+
+
+
+    getHistory();
+
+
+    $element.siderbar.find('li').each(function (value, element) {
+        var $element = $(element);
+        $element.on('click', function () {
+            var $former_active = $('ul.nav-sidebar li.active');
+            $former_active.removeClass('active');
+            var $this = $(this);
+            $this.addClass('active');
+            page_type = $former_active.find('a').get(0).dataset.goTo;
+            getHistory();
+        })
+    });
+
+    $('.bars').on('click', function (event) {
+        $('.sidebar').toggleClass('show');
+    });
+    
+    
+    
 
 });
