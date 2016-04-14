@@ -55,6 +55,7 @@ func (this *ContentController)GetHistory() {
 	{
 		label:name,
 		code:code_type,(update,add,delete)
+		istrue:"0"/"1"
 		content:{
 			Id         int
 			Type       string
@@ -71,6 +72,26 @@ func (this *ContentController)ExeCode() {
 	user_sess := this.GetSession(request.RemoteAddr);
 	if user_sess != nil {
 		fmt.Println(request.Body);
+		// get label
+		code_type := request.Form["code"][0];
+		var content_temp models.Content;
+		fuck_error("fuck json to content",
+			json.Unmarshal([]byte(request.Form["content"][0]), &content_temp));
+		switch code_type {
+		case "add":
+			models.InsertContentItem(&content_temp);
+			break
+		case "update":
+			models.UpdateContentItem(&content_temp);
+			break
+		case "delete":
+			models.DeleteContentItem(&content_temp);
+			break
+		}
+		if request.Form["code"][0] == "1" {
+			models.SetItemTrue(&content_temp);
+		}
+		return
 	}
 	return
 }
