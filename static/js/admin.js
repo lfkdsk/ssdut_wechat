@@ -26,20 +26,64 @@ $(document).ready(function () {
     }
 
     /**
+     * 编码数据
+     * @param type - 执行的方法
+     * @param id - 发生事件的元素与数据id
+     */
+    function encodingData(type, id) {
+        var encode_data = {
+            label: page_type,
+            code: type
+        };
+        
+        if (type !== 'add' || type !== 'update') {
+            for (var i in data) {
+                if (data.hasOwnProperty(i)) {
+                    if (data[i].Id === id) {
+                        encode_data.content = data[i];
+                        break;
+                    }
+                }
+            }
+        }
+        
+        switch (type) {
+            case 'show':
+                encode_data.istrue = true;
+                break;
+
+            case 'add':
+                
+                break;
+
+            case 'update':
+                
+                break;
+            case 'delete':
+            default:
+                encode_data.istrue = false;
+                break;
+        }
+        sendData('/execode', encode_data, type);
+    }
+
+
+    /**
      * 向服务器发送修改后的数据，并准备回调函数
      * @param url - 发送的url接口
      * @param data - 要发送的数据
+     * @param type - 执行的方法
      */
-    function sendData (url, data) {
+    function sendData (url, data, type) {
         $.ajax({
             url: url,
             data: data,
             method: 'POST',
             error: function () {
-                
+                $('#fail').modal();
             },
             success: function () {
-                
+                getHistory();
             }
         });
     }
@@ -59,7 +103,9 @@ $(document).ready(function () {
 
         $element.delete_button =
             $editor_inbox.find('button[data-to-do="delete"]');
-
+        
+        $element.show_button = 
+            $editor_inbox.find('button[data-to-do="show"]');
 
 
         bindEvent();
@@ -70,22 +116,46 @@ $(document).ready(function () {
      * 绑定按钮事件
      */
     function bindEvent() {
+
+        function removeBind (element) {
+            $.each(element ,function (value, element) {
+                element.removeEventListener('click', bindAllEvent);
+            })
+        }
+
+        function bindAllEvent(event) {
+            var $this = $(this);
+            change.id = $this.get(0).dataset.id;
+            change.type = type;
+            console.log(event);
+            if (type === 'update') {
+                var value = content[change.id];
+                $('#update-article').get(0).dataset.id = change.id;
+                $('#update-title').val(title[change.id]);
+                editor.update.setValue(value);
+            } else if (type === 'show') {
+                var target = event.target;
+                console.log(event.target);
+                encodingData(target.dataset.toDo, target.dataset.id);
+            } else {
+                $('#delete-article').get(0).dataset.id = change.id;
+                // console.log($('#update-article').get(0).dataset.id);
+            }
+        }
+
         function bindEvent(element, type) {
             $.each(element, function (value, element) {
-                $(element).on('click', function (event) {
-                    var $this = $(this);
-                    change.id = $this.get(0).dataset.id;
-                    change.type = type;
-                    //console.error(title);
-                    var value = content[change.id];
-                    $('#update-title').val(title[change.id]);
-                    editor.update.setValue(value);
-                });
+                $(element).on('click', bindAllEvent);
             });
         }
 
+
+        removeBind($element.update_button);
+        removeBind($element.delete_button);
+        removeBind($element.show_button);
         bindEvent($element.update_button, 'update');
         bindEvent($element.delete_button, 'delete');
+        bindEvent($element.show_button, 'show');
     }
 
     /**
@@ -195,12 +265,10 @@ $(document).ready(function () {
         $('.sidebar').toggleClass('show');
     });
     
-    $('button[data-to-do="show"]').each(function (value, element) {
-        $(element).on('click', function (event) {
-            console.log(event.target);
-
+    $('#delete-article').find('button.btn-danger')
+        .on('click', function (event) {
+            encodingData('delete',
+                document.querySelector('#delete-article').dataset.id);
         })
-    });
-    
 
 });
