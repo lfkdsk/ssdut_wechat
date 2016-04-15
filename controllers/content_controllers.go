@@ -54,7 +54,7 @@ func (this *ContentController)GetHistory() {
 /**
 	{
 		label:name,
-		code:code_type,(update,add,delete)
+		code:code_type,(update,add,delete,show)
 		istrue:"0"/"1"
 		content:{
 			Id         int

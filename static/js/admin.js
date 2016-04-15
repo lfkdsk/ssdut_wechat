@@ -97,7 +97,8 @@ $(document).ready(function () {
         var append_element = {
             text: document.createTextNode('编辑时间：' + data.Modifytime),
             update_button: createNewHistoryButton('update', data.Id),
-            delete_button: createNewHistoryButton('delete', data.Id)
+            delete_button: createNewHistoryButton('delete', data.Id),
+            show_button: createNewHistoryButton('show', data.Id)
         };
         content[data.Id] = data.Content.replace(TITLE_REGEX, '');
         title[data.Id] = TITLE_REGEX.exec(data.Content)[0].replace(/<.+>(.+)<.+>/, '$1');
@@ -120,10 +121,12 @@ $(document).ready(function () {
     function createNewHistoryButton(type, target) {
         var new_button = document.createElement('button');
         new_button.dataset.toDo = type;
-        new_button.dataset.toggle = 'modal';
+        if (target !== 'show') {
+            new_button.dataset.toggle = 'modal';
+            new_button.dataset.target = '#' + type + '-article';
+        }
         new_button.className = 'btn btn-sm';
         new_button.dataset.id = target;
-        new_button.dataset.target = '#' + type + '-article';
         switch (type) {
             case 'update':
                 new_button.appendChild(document.createTextNode('编辑'));
@@ -132,6 +135,10 @@ $(document).ready(function () {
             case 'delete':
                 new_button.appendChild(document.createTextNode('删除'));
                 new_button.className += ' btn-danger';
+                break;
+            case 'show':
+                new_button.appendChild(document.createTextNode('设为展示文章'));
+                new_button.className += ' btn-primary';
                 break;
             default:
                 new_button = null;
@@ -188,7 +195,12 @@ $(document).ready(function () {
         $('.sidebar').toggleClass('show');
     });
     
-    
+    $('button[data-to-do="show"]').each(function (value, element) {
+        $(element).on('click', function (event) {
+            console.log(event.target);
+
+        })
+    });
     
 
 });
