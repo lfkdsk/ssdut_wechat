@@ -122,30 +122,29 @@ $(document).ready(function () {
                 element.removeEventListener('click', bindAllEvent);
             })
         }
-
-        function bindAllEvent(event) {
-            var $this = $(this);
-            change.id = $this.get(0).dataset.id;
-            change.type = type;
-            console.log(event);
-            if (type === 'update') {
-                var value = content[change.id];
-                $('#update-article').get(0).dataset.id = change.id;
-                $('#update-title').val(title[change.id]);
-                editor.update.setValue(value);
-            } else if (type === 'show') {
-                var target = event.target;
-                console.log(event.target);
-                encodingData(target.dataset.toDo, target.dataset.id);
-            } else {
-                $('#delete-article').get(0).dataset.id = change.id;
-                // console.log($('#update-article').get(0).dataset.id);
-            }
-        }
+        
 
         function bindEvent(element, type) {
             $.each(element, function (value, element) {
-                $(element).on('click', bindAllEvent);
+                $(element).on('click', function (event) {
+                    var $this = $(this);
+                    change.id = $this.get(0).dataset.id;
+                    change.type = type;
+                    console.log(event);
+                    if (type === 'update') {
+                        var value = content[change.id];
+                        $('#update-article').get(0).dataset.id = change.id;
+                        $('#update-title').val(title[change.id]);
+                        editor.update.setValue(value);
+                    } else if (type === 'show') {
+                        var target = event.target;
+                        console.log(event.target);
+                        encodingData(target.dataset.toDo, target.dataset.id);
+                    } else {
+                        $('#delete-article').get(0).dataset.id = change.id;
+                        // console.log($('#update-article').get(0).dataset.id);
+                    }
+                });
             });
         }
 
