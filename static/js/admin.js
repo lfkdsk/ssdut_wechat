@@ -48,20 +48,31 @@ $(document).ready(function () {
                 }
             }
         }
-        
+
+        console.log(encode_data);
+
         switch (type) {
             case 'show':
                 encode_data.istrue = true;
                 break;
 
             case 'add':
-                
+                // for (var count in data) {
+                //     if (data.hasOwnProperty(i)) {
+                //
+                //         // 两个id可能会出现类型问题
+                //         if (data[count].Id == id) {
+                //             encode_data.content = JSON.stringify(data[count]);
+                //             break;
+                //         }
+                //     }
+                // }
                 break;
 
             case 'update':
                 
                 break;
-            
+
             case 'delete':
             default:
                 encode_data.istrue = false;
@@ -81,11 +92,11 @@ $(document).ready(function () {
         $.ajax({
             url: url,
             data: data,
-            method: 'POST',
-            error: function () {
+            method: 'post',
+            error: function (error) {
                 $('#fail').modal();
             },
-            success: function () {
+            success: function (response) {
                 getHistory();
             }
         });
@@ -173,7 +184,12 @@ $(document).ready(function () {
             show_button: createNewHistoryButton('show', data.Id)
         };
         content[data.Id] = data.Content.replace(TITLE_REGEX, '');
-        title[data.Id] = TITLE_REGEX.exec(data.Content)[0].replace(/<.+>(.+)<.+>/, '$1');
+        if (/<h3>(.+)<\/h3>/.test(data.Content)) {
+            title[data.Id] = TITLE_REGEX.exec(data.Content)[0].replace(/<h3>(.+)<\/h3>/, '$1');
+        } else {
+            title[data.Id] = undefined;
+        }
+
         for (var i in append_element) {
             if (append_element.hasOwnProperty(i)) {
                 new_li.appendChild(append_element[i]);
