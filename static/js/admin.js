@@ -117,12 +117,12 @@ $(document).ready(function () {
      */
     function bindEvent() {
 
-        function removeBind (element) {
-            $.each(element ,function (value, element) {
-                element.removeEventListener('click', bindAllEvent);
-            })
-        }
-        
+        // function removeBind (element) {
+        //     $.each(element ,function (value, element) {
+        //         element.removeEventListener('click', bindAllEvent);
+        //     })
+        // }
+
 
         function bindEvent(element, type) {
             $.each(element, function (value, element) {
@@ -149,9 +149,9 @@ $(document).ready(function () {
         }
 
 
-        removeBind($element.update_button);
-        removeBind($element.delete_button);
-        removeBind($element.show_button);
+        // removeBind($element.update_button);
+        // removeBind($element.delete_button);
+        // removeBind($element.show_button);
         bindEvent($element.update_button, 'update');
         bindEvent($element.delete_button, 'delete');
         bindEvent($element.show_button, 'show');
