@@ -39,8 +39,10 @@ $(document).ready(function () {
         if (type !== 'add' || type !== 'update') {
             for (var i in data) {
                 if (data.hasOwnProperty(i)) {
-                    if (data[i].Id === id) {
-                        encode_data.content = data[i];
+
+                    // 两个id可能会出现类型问题
+                    if (data[i].Id == id) {
+                        encode_data.content = JSON.stringify(data[i]);
                         break;
                     }
                 }
@@ -59,6 +61,7 @@ $(document).ready(function () {
             case 'update':
                 
                 break;
+            
             case 'delete':
             default:
                 encode_data.istrue = false;
@@ -268,6 +271,14 @@ $(document).ready(function () {
         .on('click', function (event) {
             encodingData('delete',
                 document.querySelector('#delete-article').dataset.id);
-        })
+        });
+
+    $('#update-article').find('button.btn-success')
+        .on('click', function (event) {
+            encodingData('update',
+                document.querySelector('#update-article').dataset.id);
+        });
+
+
 
 });
