@@ -15,6 +15,7 @@ func init() {
 
 	orm.RegisterDataBase("Content", "mysql", "root:19960206A@/defa?charset=utf8");
 
+
 	orm.RegisterDataBase("default", "mysql", "root:19960206A@/defa?charset=utf8");
 
 }
