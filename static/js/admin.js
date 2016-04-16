@@ -34,10 +34,11 @@ $(document).ready(function () {
         var encode_data = {
             label: page_type,
             code: type
-        };
+        },
+            i;
         
         if (type !== 'add' || type !== 'update') {
-            for (var i in data) {
+            for (i in data) {
                 if (data.hasOwnProperty(i)) {
 
                     // 两个id可能会出现类型问题
@@ -70,13 +71,27 @@ $(document).ready(function () {
                 break;
 
             case 'update':
-                
+                var new_content = editor.update.getValue(),
+                    new_title = $('#update-title').val();
+                console.log(new_content, new_title);
+                for (i in data) {
+                    if (data.hasOwnProperty(i)) {
+                        if (data[i].Id == id) {
+                            encode_data.content = data[i];
+                        }
+                    }
+                }
+                encode_data.istrue = false;
+                encode_data.content.Contant = '<h3>' + new_title + '</h3>' + new_content;
+                encode_data.content.Modifytime = new Date();
+                encode_data.content = JSON.stringify(encode_data.content);
                 break;
 
             case 'delete':
             default:
                 encode_data.istrue = false;
                 break;
+
         }
         sendData('/execode', encode_data, type);
     }
@@ -282,7 +297,9 @@ $(document).ready(function () {
     $('.bars').on('click', function (event) {
         $('.sidebar').toggleClass('show');
     });
-    
+
+
+    // 迟早要合并
     $('#delete-article').find('button.btn-danger')
         .on('click', function (event) {
             encodingData('delete',
