@@ -79,21 +79,27 @@ func (this *ContentController)ExeCode() {
 			json.Unmarshal([]byte(request.Form["content"][0]), &content_temp));
 		switch code_type {
 		case "add":
-			models.InsertContentItem(&content_temp);
+			_, e := models.InsertContentItem(&content_temp);
+			return_code(e, this);
 			break
 		case "update":
-			models.UpdateContentItem(&content_temp);
+			_, e := models.UpdateContentItem(&content_temp);
+			return_code(e, this);
 			break
 		case "delete":
-			models.DeleteContentItem(&content_temp);
+			fmt.Println(content_temp.Content);
+			_, e := models.DeleteContentItem(&content_temp);
+			return_code(e, this);
+			break
+		case "show":
+			_, e := models.SetItemTrue(&content_temp);
+			return_code(e, this);
 			break
 		}
 		if request.Form["code"][0] == "1" {
 			models.SetItemTrue(&content_temp);
 		}
-		return
 	}
-	return
 }
 
 type LoginController struct {
@@ -166,5 +172,13 @@ func fuck_error(error_name string, e error) {
 		fmt.Println(error_name);
 		fmt.Println(e);
 		return
+	}
+}
+
+func return_code(e error, this *ContentController) {
+	if e != nil {
+		this.Ctx.WriteString(`{"msg"="0"}`);
+	}else {
+		this.Ctx.WriteString(`{"msg"="1"}`);
 	}
 }
