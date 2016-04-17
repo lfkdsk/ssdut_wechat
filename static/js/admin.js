@@ -54,20 +54,12 @@ $(document).ready(function () {
 
         switch (type) {
             case 'show':
-                encode_data.istrue = true;
+                encode_data.istre = true;
                 break;
 
             case 'add':
-                // for (var count in data) {
-                //     if (data.hasOwnProperty(i)) {
-                //
-                //         // 两个id可能会出现类型问题
-                //         if (data[count].Id == id) {
-                //             encode_data.content = JSON.stringify(data[count]);
-                //             break;
-                //         }
-                //     }
-                // }
+                encode_data.istrue = false;
+                
                 break;
 
             case 'update':
