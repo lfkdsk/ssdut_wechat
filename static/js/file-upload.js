@@ -7,7 +7,7 @@ $(document).ready(function () {
         browse_button: 'upload-img',
         container: 'container',
         drop_element: 'container',
-        max_file_size: '1000mb',
+        max_file_size: '100mb',
         flash_swf_url: '../static/js/vendor/plupload/js/Moxie.swf',
         dragdrop: true,
         chunk_size: '4mb',
@@ -20,7 +20,8 @@ $(document).ready(function () {
             'FilesAdded': function (up, files) {},
             'BeforeUpload': function (up, file) {},
             'UploadProgress': function (up, file) {},
-            'UploadComplete': function () {},
+            'UploadComplete': function () {
+            },
             'FileUploaded': function (up, file, info) {},
             'Error': function (up, err, errTip) {}
         }
