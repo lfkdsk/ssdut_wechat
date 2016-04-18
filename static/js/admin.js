@@ -63,7 +63,7 @@ $(document).ready(function () {
                 encode_data.istrue = false;
                 new_content = editor.append.getValue();
                 new_title = $('#add-title').val();
-                if (new_content || new_title) {
+                if (!new_content || !new_title) {
                     alert("题目与内容不能为空");
                     return;
                 }
@@ -76,7 +76,7 @@ $(document).ready(function () {
                 new_content = editor.update.getValue();
                 new_title = $('#update-title').val();
                 console.log(new_content, new_title);
-                if (new_content || new_title) {
+                if (!new_content || !new_title) {
                     alert("题目与内容不能为空");
                     return;
                 }
