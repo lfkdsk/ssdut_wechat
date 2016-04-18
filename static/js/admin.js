@@ -35,7 +35,9 @@ $(document).ready(function () {
             label: page_type,
             code: type
         },
-            i;
+            i,
+            new_content,
+            new_title;
         
         if (type !== 'add' || type !== 'update') {
             for (i in data) {
@@ -59,13 +61,25 @@ $(document).ready(function () {
 
             case 'add':
                 encode_data.istrue = false;
-                
+                new_content = editor.append.getValue();
+                new_title = $('#add-title').val();
+                if (new_content || new_title) {
+                    alert("题目与内容不能为空");
+                    return;
+                }
+                encode_data.istrue = false;
+                encode_data.content.Content = '<h3>' + new_title + '</h3>' + new_content;
+                encode_data.content = JSON.stringify(encode_data.content);
                 break;
 
             case 'update':
-                var new_content = editor.update.getValue(),
-                    new_title = $('#update-title').val();
+                new_content = editor.update.getValue();
+                new_title = $('#update-title').val();
                 console.log(new_content, new_title);
+                if (new_content || new_title) {
+                    alert("题目与内容不能为空");
+                    return;
+                }
                 for (i in data) {
                     if (data.hasOwnProperty(i)) {
                         if (data[i].Id == id) {
@@ -101,6 +115,7 @@ $(document).ready(function () {
             data: data,
             method: 'post',
             error: function (error) {
+                console.log(error);
                 $('#fail').modal();
             },
             success: function (response) {
@@ -242,7 +257,11 @@ $(document).ready(function () {
 
         return new_button;
     }
-    
+
+    /**
+     * 两个编辑器 - 更新和添加
+     * @type {{append, update}}
+     */
     var editor = {
         append: new Simditor({
             textarea: $('#append')
@@ -292,18 +311,58 @@ $(document).ready(function () {
 
 
     // 迟早要合并
+
+
+    var $update_article = $('#update-article');
+    // 确认删除
     $('#delete-article').find('button.btn-danger')
         .on('click', function (event) {
             encodingData('delete',
                 document.querySelector('#delete-article').dataset.id);
         });
 
-    $('#update-article').find('button.btn-success')
+
+    // 确认更新文章并同步至服务器
+    $update_article.find('button.btn-success')
         .on('click', function (event) {
             encodingData('update',
                 document.querySelector('#update-article').dataset.id);
         });
 
+    // 添加文章
+    $('#add-button').on('click', function (event) {
+        encodingData('add');
+    });
 
+    // 更新文章但是不上传
+    $update_article.find('button.btn-info')
+        .on('click', function (event) {
+
+            /**
+             * id - 被修改文章的id
+             * j - 计数器
+             * title_val - 被修改文章的标题
+             * content_val - 被修改文章的内容
+             */
+            var id = document.querySelector('#update-article').dataset.id,
+                j,
+                title_val =  $('#update-title').val(),
+                content_val = editor.update.getValue();
+            for (j in data) {
+                if (data.hasOwnProperty(j)) {
+
+                    // 两个id可能会出现类型问题
+                    if (data[j].Id == id) {
+
+                        data[j].Content = '<h3>' + title_val
+                            + '</h3>' + content_val;
+
+                        title[id] = title_val;
+                        content[id] = content_val;
+                        break;
+                    }
+                }
+            }
+        });
 
 });

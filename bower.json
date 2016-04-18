@@ -19,7 +19,8 @@
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.5.0",
     "js-md5": "md5#^0.4.1",
-    "simditor": "^2.3.6"
+    "simditor": "^2.3.6",
+    "webuploader": "https://github.com/fex-team/webuploader.git"
   }
 }
 
