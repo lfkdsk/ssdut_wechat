@@ -4,7 +4,7 @@
 $(document).ready(function () {
     var $list = $('table').find('tbody');
     var temp = '';
-        uploader = WebUploader.create({
+    var uploader = WebUploader.create({
 
         // 不压缩image
         resize: false,
@@ -14,7 +14,7 @@ $(document).ready(function () {
         swf: '../../static/js/vendor/webuploader/dist/Uploader.swf',
         dnd: '#container',
         // 文件接收服务端。
-        server: '',
+        server: '/uploadfile',
         auto: true,
         // 选择文件的按钮。可选。
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.

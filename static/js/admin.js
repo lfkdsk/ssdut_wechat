@@ -56,7 +56,7 @@ $(document).ready(function () {
 
         switch (type) {
             case 'show':
-                encode_data.istre = true;
+                encode_data.istrue = true;
                 break;
 
             case 'add':
@@ -88,7 +88,7 @@ $(document).ready(function () {
                     }
                 }
                 encode_data.istrue = false;
-                encode_data.content.Contant = '<h3>' + new_title + '</h3>' + new_content;
+                encode_data.content.Content = '<h3>' + new_title + '</h3>' + new_content;
                 encode_data.content.Modifytime = new Date();
                 encode_data.content = JSON.stringify(encode_data.content);
                 break;
