@@ -19,7 +19,6 @@
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.5.0",
     "js-md5": "md5#^0.4.1",
-    "qiniu": "^1.0.14-beta",
     "simditor": "^2.3.6"
   }
 }
