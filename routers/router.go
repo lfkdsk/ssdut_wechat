@@ -33,6 +33,9 @@ func init() {
 		&controllers.UploadControllers{},
 		"*:UpLoad");
 
+	beego.Router("/upload", &controllers.UploadControllers{},
+		"put:UpLoad")
+
 	beego.Router("/gethistory",
 		&controllers.ContentController{},
 		"post:GetHistory");
