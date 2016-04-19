@@ -206,7 +206,9 @@ $(document).ready(function () {
     function createNewHistoryList(data) {
         var doc = document;
         var new_tr = doc.createElement('tr');
-        var append_element;
+        var append_element,
+            append_button,
+            i;
 
 
         content[data.Id] = data.Content.replace(TITLE_REGEX, '');
@@ -219,23 +221,36 @@ $(document).ready(function () {
          *
          * @type {
          * {
-         *  title: Text,
-         *  text: Text,
-         *  update_button: button,
-         *  delete_button: button,
-         *  show_button: button
+         *  title: Element,
+         *  text: Element,
+         *  button: Element
          * }
          * }
          */
         append_element = {
-            title: doc.createTextNode(title[data.Id]),
-            text: doc.createTextNode(data.Modifytime.toString()),
+            title: doc.createElement('th')
+                .appendChild(doc
+                    .createTextNode(title[data.Id])),
+            text: doc.createElement('th')
+                .appendChild(doc
+                    .createTextNode(data.Modifytime.toString()))
+        };
+
+        append_button = {
             update_button: createNewHistoryButton('update', data.Id),
             delete_button: createNewHistoryButton('delete', data.Id),
             show_button: createNewHistoryButton('show', data.Id)
         };
 
-        for (var i in append_element) {
+        var button_th = doc.createElement('th');
+        for (i in append_button) {
+            if (append_button.hasOwnProperty(i)) {
+                button_th.appendChild(append_button[i]);
+            }
+        }
+
+        append_element.button = button_th;
+        for (i in append_element) {
             if (append_element.hasOwnProperty(i)) {
                 new_tr.appendChild(append_element[i]);
             }
