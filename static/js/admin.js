@@ -8,17 +8,17 @@ $(document).ready(function () {
      */
     function getHistory() {
         $.post('/gethistory', {label: page_type}, function (response) {
-            while(history_ul.hasChildNodes()) {
-                history_ul.removeChild(history_ul.firstChild);
+            while(history_table.hasChildNodes()) {
+                history_table.removeChild(history_table.firstChild);
             }
 
             data = JSON.parse(response);
             for (var i = data.length - 1; i >= 0; --i) {
-                new_li = createNewHistoryList(data[i]);
+                new_tr = createNewHistoryList(data[i]);
                 if (data[i].Istrue) {
-                    history_ul.insertBefore(new_li, history_ul.firstChild);
+                    history_table.insertBefore(new_tr, history_table.firstChild);
                 } else {
-                    history_ul.appendChild(new_li);
+                    history_table.appendChild(new_tr);
                 }
             }
             historyCallback();
@@ -203,7 +203,7 @@ $(document).ready(function () {
      */
     function createNewHistoryList(data) {
         var doc = document;
-        var new_li = doc.createElement('tr');
+        var new_tr = doc.createElement('tr');
         var append_element;
 
 
@@ -235,12 +235,12 @@ $(document).ready(function () {
 
         for (var i in append_element) {
             if (append_element.hasOwnProperty(i)) {
-                new_li.appendChild(append_element[i]);
+                new_tr.appendChild(append_element[i]);
             }
         }
-        new_li.dataset.id = data.Id;
-        // new_li.className = 'admin-item admin-content btn btn-default';
-        return new_li;
+        new_tr.dataset.id = data.Id;
+        // new_tr.className = 'admin-item admin-content btn btn-default';
+        return new_tr;
     }
 
 
@@ -303,8 +303,8 @@ $(document).ready(function () {
         data,
         content = {},
         title = {},
-        history_ul = document.querySelector('#editor-article table tbody');
-        new_li;
+        history_table = document.querySelector('#editor-article table tbody'),
+        new_tr;
 
     $element.siderbar =
         $('.nav-sidebar');
