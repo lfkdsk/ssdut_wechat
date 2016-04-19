@@ -8,7 +8,7 @@ $(document).ready(function () {
      */
     function getHistory() {
         $.post('/gethistory', {label: page_type}, function (response) {
-            while(history_ul.hasChildNodes()) {
+            while (history_ul.hasChildNodes()) {
                 history_ul.removeChild(history_ul.firstChild);
             }
 
@@ -32,13 +32,13 @@ $(document).ready(function () {
      */
     function encodingData(type, id) {
         var encode_data = {
-            label: page_type,
-            code: type
-        },
+                label: page_type,
+                code: type
+            },
             i,
             new_content,
             new_title;
-        
+
         if (type !== 'add' || type !== 'update') {
             for (i in data) {
                 if (data.hasOwnProperty(i)) {
@@ -109,16 +109,18 @@ $(document).ready(function () {
      * @param data - 要发送的数据
      * @param type - 执行的方法
      */
-    function sendData (url, data, type) {
+    function sendData(url, data, type) {
         $.ajax({
             url: url,
             data: data,
             method: 'post',
-            error: function (error) {
-                console.log(error);
+            error: function ( error) {
+                //console.log(error);
+                //console.error(response);
                 $('#fail').modal();
             },
             success: function (response) {
+                console.error(response);
                 getHistory();
             }
         });
@@ -139,8 +141,8 @@ $(document).ready(function () {
 
         $element.delete_button =
             $editor_inbox.find('button[data-to-do="delete"]');
-        
-        $element.show_button = 
+
+        $element.show_button =
             $editor_inbox.find('button[data-to-do="show"]');
 
 
@@ -289,7 +291,6 @@ $(document).ready(function () {
         $('.nav-sidebar');
 
 
-
     getHistory();
 
 
@@ -346,7 +347,7 @@ $(document).ready(function () {
              */
             var id = document.querySelector('#update-article').dataset.id,
                 j,
-                title_val =  $('#update-title').val(),
+                title_val = $('#update-title').val(),
                 content_val = editor.update.getValue();
             for (j in data) {
                 if (data.hasOwnProperty(j)) {

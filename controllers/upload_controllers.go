@@ -16,7 +16,7 @@ func (this *UploadControllers)UpLoad() {
 
 func (this *UploadControllers)GetUploadFile() {
 	f, h, _ := this.GetFile("image"); //获取上传的文件
-	path := "./static/media/img/" + h.Filename;
+	path := "./upload/" + h.Filename;
 	f.Close()
 	this.SaveToFile("image", path)
 }

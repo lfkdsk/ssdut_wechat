@@ -100,6 +100,7 @@ func (this *ContentController)ExeCode() {
 			models.SetItemTrue(&content_temp);
 		}
 	}
+	return
 }
 
 type LoginController struct {
