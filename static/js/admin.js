@@ -303,7 +303,7 @@ $(document).ready(function () {
         data,
         content = {},
         title = {},
-        history_ul = document.querySelector('#editor-article ul'),
+        history_ul = document.querySelector('#editor-article table tbody');
         new_li;
 
     $element.siderbar =
