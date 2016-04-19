@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/astaxie/beego"
 	"ssdut_wechat/models"
-	"time"
+	//"time"
 )
 
 type UploadControllers struct {
@@ -16,8 +16,7 @@ func (this *UploadControllers)UpLoad() {
 
 func (this *UploadControllers)GetUploadFile() {
 	f, h, _ := this.GetFile("image"); //获取上传的文件
-	now := time.Now();
-	path := "./static/media/img/" + string(now.Year()) + "/" + string(now.Month()) + "/" + string(now.Day()) + "/" + h.Filename;
+	path := "./upload/" + h.Filename;
 	f.Close()
 	this.SaveToFile("image", path)
 }

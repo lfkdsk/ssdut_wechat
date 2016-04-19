@@ -7,6 +7,8 @@ import (
 
 func init() {
 
+	//beego.SetStaticPath("static","public");
+
 	beego.AutoRouter(&controllers.Controller{});
 
 	beego.Router("/", &controllers.ContentController{});
@@ -33,16 +35,21 @@ func init() {
 		&controllers.UploadControllers{},
 		"*:UpLoad");
 
-	beego.Router("/upload", &controllers.UploadControllers{},
-		"put:UpLoad")
+	beego.Router("/uploadfile",
+		&controllers.UploadControllers{},
+		"post:GetUploadFile")
 
 	beego.Router("/gethistory",
 		&controllers.ContentController{},
 		"post:GetHistory");
 
-	beego.Router("/getfiletoken",
-		&controllers.UploadControllers{}, "get:GetFileToken")
-
 	beego.Router("/execode",
-		&controllers.ContentController{}, "post:ExeCode")
+		&controllers.ContentController{},
+		"post:ExeCode");
+
+	beego.Router("/getfiletoken",
+		&controllers.UploadControllers{},
+		"get:GetFileToken");
+
+
 }
