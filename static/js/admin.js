@@ -8,6 +8,8 @@ $(document).ready(function () {
      */
     function getHistory() {
         $.post('/gethistory', {label: page_type}, function (response) {
+
+            // 清空之前的节点
             while(history_table.hasChildNodes()) {
                 history_table.removeChild(history_table.firstChild);
             }
