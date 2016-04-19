@@ -233,7 +233,7 @@ $(document).ready(function () {
             }
         }
         new_li.dataset.id = data.Id;
-        new_li.className = 'admin-item admin-content';
+        new_li.className = 'admin-item admin-content btn btn-default';
         return new_li;
     }
 
