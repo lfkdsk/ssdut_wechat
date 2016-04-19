@@ -217,6 +217,8 @@ $(document).ready(function () {
         } else {
             title[data.Id] = undefined;
         }
+        console.log(title[data.Id]);
+        console.log(data.Modifytime.toString());
         /**
          *
          * @type {
@@ -250,6 +252,7 @@ $(document).ready(function () {
         }
 
         append_element.button = button_th;
+        console.log(append_element);
         for (i in append_element) {
             if (append_element.hasOwnProperty(i)) {
                 new_tr.appendChild(append_element[i]);
