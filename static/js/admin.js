@@ -208,6 +208,7 @@ $(document).ready(function () {
         var new_tr = doc.createElement('tr');
         var append_element,
             append_button,
+            append_text,
             i;
 
 
@@ -229,14 +230,22 @@ $(document).ready(function () {
          * }
          * }
          */
-        append_element = {
-            title: doc.createElement('th')
-                .appendChild(doc
-                    .createTextNode(title[data.Id])),
-            text: doc.createElement('th')
-                .appendChild(doc
-                    .createTextNode(data.Modifytime.toString()))
+        append_text = {
+            title: doc.createTextNode(title[data.Id]),
+            text: doc.createTextNode(data.Modifytime.toString())
         };
+
+        append_element = {
+            title: doc.createElement('th'),
+            text: doc.createElement('th')
+        };
+
+        for (i in append_text) {
+            if (append_text.hasOwnProperty(i)
+                && append_element.hasOwnProperty(i)) {
+                append_element[i].appendChild(append_text[i]);
+            }
+        }
 
         append_button = {
             update_button: createNewHistoryButton('update', data.Id),
