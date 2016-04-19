@@ -87,9 +87,12 @@ $(document).ready(function () {
                         }
                     }
                 }
+                var date = new Date();
                 encode_data.istrue = false;
                 encode_data.content.Content = '<h3>' + new_title + '</h3>' + new_content;
-                encode_data.content.Modifytime = new Date();
+                encode_data.content.Modifytime = date.getFullYear().toString() + '-'
+                    + date.getMonth() + '-'
+                    + date.getDay();
                 encode_data.content = JSON.stringify(encode_data.content);
                 break;
 
@@ -200,40 +203,43 @@ $(document).ready(function () {
      */
     function createNewHistoryList(data) {
         var doc = document;
-        var new_li = doc.createElement('li');
+        var new_li = doc.createElement('tr');
+        var append_element;
 
-        /**
-         * 
-         * @type {
-         * {
-         *  title: Text,
-         *  text: Text, 
-         *  update_button: button, 
-         *  delete_button: button, 
-         *  show_button: button
-         * }
-         * }
-         */
-        var append_element = {
-            text: doc.createTextNode('编辑时间：' + data.Modifytime),
-            update_button: createNewHistoryButton('update', data.Id),
-            delete_button: createNewHistoryButton('delete', data.Id),
-            show_button: createNewHistoryButton('show', data.Id)
-        };
+
         content[data.Id] = data.Content.replace(TITLE_REGEX, '');
         if (/<h3>(.+)<\/h3>/.test(data.Content)) {
             title[data.Id] = TITLE_REGEX.exec(data.Content)[0].replace(/<h3>(.+)<\/h3>/, '$1');
         } else {
             title[data.Id] = undefined;
         }
-        append_element.title = doc.createTextNode('文章标题：' + title[data.Id]);
+        /**
+         *
+         * @type {
+         * {
+         *  title: Text,
+         *  text: Text,
+         *  update_button: button,
+         *  delete_button: button,
+         *  show_button: button
+         * }
+         * }
+         */
+        append_element = {
+            title: doc.createTextNode(title[data.Id]),
+            text: doc.createTextNode(data.Modifytime.toString()),
+            update_button: createNewHistoryButton('update', data.Id),
+            delete_button: createNewHistoryButton('delete', data.Id),
+            show_button: createNewHistoryButton('show', data.Id)
+        };
+
         for (var i in append_element) {
             if (append_element.hasOwnProperty(i)) {
                 new_li.appendChild(append_element[i]);
             }
         }
         new_li.dataset.id = data.Id;
-        new_li.className = 'admin-item admin-content btn btn-default';
+        // new_li.className = 'admin-item admin-content btn btn-default';
         return new_li;
     }
 

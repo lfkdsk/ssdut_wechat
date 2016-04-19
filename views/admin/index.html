@@ -67,20 +67,45 @@
 
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="editor-article">
-                        <ul>
-                            <li class="admin-item admin-content btn btn-default" data-id="1">
-                                文章标题：
-                                编辑时间：
-                                <button class="btn btn-sm btn-success"
-                                        data-target="#update-article" data-toggle="modal"
-                                        data-to-do="update" data-id="1">编辑</button>
-                                <button class="btn btn-sm btn-danger"
-                                        data-target="#delete-article" data-toggle="modal"
-                                        data-to-do="delete" data-id="1">删除</button>
-                                <button class="btn btn-sm btn-primary"
-                                        data-to-do="show" data-id="1">设为展示文章</button>
-                            </li>
-                        </ul>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th class="col-md-2">标题</th>
+                                <th class="col-md-4">修改时间</th>
+                                <th class="col-md-6">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-id="1">
+                                    <th>文章标题：</th>
+                                    <th>编辑时间：</th>
+                                    <th>
+                                        <button class="btn btn-sm btn-success"
+                                            data-target="#update-article" data-toggle="modal"
+                                            data-to-do="update" data-id="1">编辑</button>
+                                        <button class="btn btn-sm btn-danger"
+                                            data-target="#delete-article" data-toggle="modal"
+                                            data-to-do="delete" data-id="1">删除</button>
+                                        <button class="btn btn-sm btn-primary"
+                                            data-to-do="show" data-id="1">设为展示文章</button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--<ul>-->
+                            <!--<li class="admin-item admin-content btn btn-default" data-id="1">-->
+                                <!--文章标题：-->
+                                <!--编辑时间：-->
+                                <!--<button class="btn btn-sm btn-success"-->
+                                        <!--data-target="#update-article" data-toggle="modal"-->
+                                        <!--data-to-do="update" data-id="1">编辑</button>-->
+                                <!--<button class="btn btn-sm btn-danger"-->
+                                        <!--data-target="#delete-article" data-toggle="modal"-->
+                                        <!--data-to-do="delete" data-id="1">删除</button>-->
+                                <!--<button class="btn btn-sm btn-primary"-->
+                                        <!--data-to-do="show" data-id="1">设为展示文章</button>-->
+                            <!--</li>-->
+                        <!--</ul>-->
                     </div>
 
                     <div role="tabpanel" class="tab-pane" id="add-article">

@@ -2,7 +2,7 @@
  * Created by li-rz on 16-4-18.
  */
 $(document).ready(function () {
-    var $list = $('table').find('tbody');
+    var $list = $('table.table-striped').find('tbody');
     var temp = '';
     var uploader = WebUploader.create({
 
