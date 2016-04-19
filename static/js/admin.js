@@ -184,7 +184,7 @@ $(document).ready(function () {
                         encodingData(target.dataset.toDo, target.dataset.id);
                     } else {
                         $('#delete-article').get(0).dataset.id = change.id;
-                        // console.log($('#update-article').get(0).dataset.id);
+                        //
                     }
                 });
             });
@@ -218,16 +218,13 @@ $(document).ready(function () {
         } else {
             title[data.Id] = undefined;
         }
-        console.log(title[data.Id]);
-        console.log(data.Modifytime.toString());
         /**
          *
          * @type {
-         * {
-         *  title: Element,
-         *  text: Element,
-         *  button: Element
-         * }
+         *  {
+         *      title: Text,
+         *      text: Text
+         *  }
          * }
          */
         append_text = {
@@ -235,6 +232,16 @@ $(document).ready(function () {
             text: doc.createTextNode(data.Modifytime.toString())
         };
 
+        /**
+         *
+         * @type {
+         *  {
+         *      title: Element,
+         *      text: Element,
+         *      button: Element
+         *  }
+         * }
+         */
         append_element = {
             title: doc.createElement('th'),
             text: doc.createElement('th')
@@ -261,7 +268,7 @@ $(document).ready(function () {
         }
 
         append_element.button = button_th;
-        console.log(append_element);
+
         for (i in append_element) {
             if (append_element.hasOwnProperty(i)) {
                 new_tr.appendChild(append_element[i]);
@@ -306,6 +313,43 @@ $(document).ready(function () {
         }
 
         return new_button;
+    }
+
+    /**
+     * 保存文章至本地
+     * @param event
+     */
+    function saveInClient (event) {
+        /**
+         * id - 被修改文章的id
+         * j - 计数器
+         * title_val - 被修改文章的标题
+         * content_val - 被修改文章的内容
+         */
+        var id = document.querySelector('#update-article').dataset.id,
+            j,
+            title_val =  $('#update-title').val(),
+            content_val = editor.update.getValue();
+        for (j in data) {
+            if (data.hasOwnProperty(j)) {
+
+                // 两个id可能会出现类型问题
+                if (data[j].Id == id) {
+
+                    data[j].Content = '<h3>' + title_val
+                        + '</h3>' + content_val;
+
+                    title[id] = title_val;
+                    content[id] = content_val;
+                    break;
+                }
+            }
+        }
+
+        // 未保存提醒
+        $('li[data-id="' + id + '"]').addClass('.bg-danger');
+        console.log(content);
+        console.log(title);
     }
 
     /**
@@ -386,36 +430,6 @@ $(document).ready(function () {
 
     // 更新文章但是不上传
     $update_article.find('button.btn-info')
-        .on('click', function (event) {
-
-            /**
-             * id - 被修改文章的id
-             * j - 计数器
-             * title_val - 被修改文章的标题
-             * content_val - 被修改文章的内容
-             */
-            var id = document.querySelector('#update-article').dataset.id,
-                j,
-                title_val =  $('#update-title').val(),
-                content_val = editor.update.getValue();
-            for (j in data) {
-                if (data.hasOwnProperty(j)) {
-
-                    // 两个id可能会出现类型问题
-                    if (data[j].Id == id) {
-
-                        data[j].Content = '<h3>' + title_val
-                            + '</h3>' + content_val;
-
-                        title[id] = title_val;
-                        content[id] = content_val;
-                        break;
-                    }
-                }
-            }
-
-            // 未保存提醒
-            $('li[data-id="' + id + '"]').addClass('.bg-danger');
-        });
+        .on('click', saveInClient);
 
 });
