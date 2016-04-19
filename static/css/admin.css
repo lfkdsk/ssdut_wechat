@@ -97,8 +97,22 @@ nav i:hover {
     padding: 5px 20px;
 }
 
+#editor-article li{
+    margin-top: 10px;
+}
+
+.admin-input {
+    /*width: 100%;*/
+    text-align: center;
+    margin: 5px 0;
+}
+
 .admin-content {
     padding: 10px 40px;
     position: relative;
+    width: 87%;
+    text-align: left;
 }
+
+
 

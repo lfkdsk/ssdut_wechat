@@ -119,6 +119,7 @@ $(document).ready(function () {
                 $('#fail').modal();
             },
             success: function (response) {
+                console.log(response);
                 getHistory();
             }
         });
@@ -198,9 +199,23 @@ $(document).ready(function () {
      * @param data (obj)
      */
     function createNewHistoryList(data) {
-        var new_li = document.createElement('li');
+        var doc = document;
+        var new_li = doc.createElement('li');
+
+        /**
+         * 
+         * @type {
+         * {
+         *  title: Text,
+         *  text: Text, 
+         *  update_button: button, 
+         *  delete_button: button, 
+         *  show_button: button
+         * }
+         * }
+         */
         var append_element = {
-            text: document.createTextNode('编辑时间：' + data.Modifytime),
+            text: doc.createTextNode('编辑时间：' + data.Modifytime),
             update_button: createNewHistoryButton('update', data.Id),
             delete_button: createNewHistoryButton('delete', data.Id),
             show_button: createNewHistoryButton('show', data.Id)
@@ -211,7 +226,7 @@ $(document).ready(function () {
         } else {
             title[data.Id] = undefined;
         }
-
+        append_element.title = doc.createTextNode('文章标题：' + title[data.Id]);
         for (var i in append_element) {
             if (append_element.hasOwnProperty(i)) {
                 new_li.appendChild(append_element[i]);
