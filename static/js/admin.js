@@ -133,7 +133,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 console.log(response);
-                getHistory();
+                location.reload();
             }
         });
     }
