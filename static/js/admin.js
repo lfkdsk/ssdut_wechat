@@ -33,12 +33,45 @@ $(document).ready(function () {
      * @param id - 发生事件的元素与数据id
      */
     function encodingData(type, id) {
+
+        /**
+         * 合并update与add事件
+         * @returns {boolean} - 是否文章内容与题目均有数据
+         */
+        function updateAndAdd () {
+            new_content = editor[type].getValue();
+            new_title = $('#'+ type + '-title').val();
+            console.log(new_content, new_title);
+            if (!new_content || !new_title) {
+                return false;
+            }
+            if (type === 'update') {
+                for (i in data) {
+                    if (data.hasOwnProperty(i)) {
+                        if (data[i].Id == id) {
+                            encode_data.content = data[i];
+                        }
+                    }
+                }
+            }
+            encode_data.istrue = false;
+            encode_data.content.Type = page_type;
+            encode_data.content.Content = '<h3>' + new_title + '</h3>' + new_content;
+            encode_data.content.Modifytime = date.getFullYear().toString() + '-'
+                + date.getMonth() + '-'
+                + date.getDay();
+            encode_data.content = JSON.stringify(encode_data.content);
+            return true;
+        }
+
+
         var encode_data = {
-            label: page_type,
+            type: page_type,
             code: type
         },
             i,
             new_content,
+            date = new Date(),
             new_title;
         
         if (type !== 'add' || type !== 'update') {
@@ -62,43 +95,15 @@ $(document).ready(function () {
                 break;
 
             case 'add':
-                encode_data.istrue = false;
-                new_content = editor.append.getValue();
-                new_title = $('#add-title').val();
-                encode_data.content = {};
-                console.log(new_title);
-                console.log(new_content);
-                if (!new_content || !new_title) {
-                    alert("题目与内容不能为空");
+                if (!updateAndAdd()) {
                     return;
                 }
-                encode_data.istrue = false;
-                encode_data.content.Content = '<h3>' + new_title + '</h3>' + new_content;
-                encode_data.content = JSON.stringify(encode_data.content);
                 break;
 
             case 'update':
-                new_content = editor.update.getValue();
-                new_title = $('#update-title').val();
-                console.log(new_content, new_title);
-                if (!new_content || !new_title) {
-                    alert("题目与内容不能为空");
+                if (!updateAndAdd()) {
                     return;
                 }
-                for (i in data) {
-                    if (data.hasOwnProperty(i)) {
-                        if (data[i].Id == id) {
-                            encode_data.content = data[i];
-                        }
-                    }
-                }
-                var date = new Date();
-                encode_data.istrue = false;
-                encode_data.content.Content = '<h3>' + new_title + '</h3>' + new_content;
-                encode_data.content.Modifytime = date.getFullYear().toString() + '-'
-                    + date.getMonth() + '-'
-                    + date.getDay();
-                encode_data.content = JSON.stringify(encode_data.content);
                 break;
 
             case 'delete':
@@ -357,10 +362,10 @@ $(document).ready(function () {
 
     /**
      * 两个编辑器 - 更新和添加
-     * @type {{append, update}}
+     * @type {{add, update}}
      */
     var editor = {
-        append: new Simditor({
+        add: new Simditor({
             textarea: $('#append')
         }),
         update: new Simditor({
