@@ -350,7 +350,7 @@ $(document).ready(function () {
         }
 
         // 未保存提醒
-        $('li[data-id="' + id + '"]').addClass('.bg-danger');
+        $('tr[data-id="' + id + '"]').addClass('.bg-danger');
         console.log(content);
         console.log(title);
     }
