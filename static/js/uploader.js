@@ -1,6 +1,3 @@
-/**
- * Created by li-rz on 16-4-18.
- */
 $(document).ready(function () {
     var $list = $('table.table-striped').find('tbody');
     var temp = '';
@@ -73,6 +70,7 @@ $(document).ready(function () {
     });
 
     uploader.on('uploadAccept', function (object, ret) {
-        
+        console.log(ret);
+
     });
 });
