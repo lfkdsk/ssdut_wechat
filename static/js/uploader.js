@@ -2,7 +2,6 @@
  * Created by li-rz on 16-4-18.
  */
 $(document).ready(function () {
-    var $ = jQuery;
     var $list = $('table.table-striped').find('tbody');
     var temp = '';
     var uploader = WebUploader.create({
@@ -61,7 +60,7 @@ $(document).ready(function () {
     });
 
     uploader.on('uploadSuccess', function (file) {
-        //$('#' + file.id).text('已上传');
+        // $('#' + file.id).text('已上传');
         temp = file.id;
     });
 
@@ -70,14 +69,10 @@ $(document).ready(function () {
     });
 
     uploader.on('uploadComplete', function (file) {
-        // $('#' + file.id).fadeOut();
-        
+        temp = file.id;
     });
 
     uploader.on('uploadAccept', function (object, ret) {
-        console.log("=========================");
-        console.log(ret);
-        console.log(temp);
-        $('#' + temp).append(ret._raw.toString());
+        $('#' + temp).text(ret._raw.toString());
     });
 });
