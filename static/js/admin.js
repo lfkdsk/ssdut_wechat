@@ -145,6 +145,7 @@ $(document).ready(function () {
                 editor.update.setValue('');
                 $('#update-title').val('');
                 $('#add-title').val('');
+                alert('成功了！！！！');
                 getHistory();
             }
         });

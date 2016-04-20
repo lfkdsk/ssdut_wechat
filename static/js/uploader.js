@@ -73,6 +73,6 @@ $(document).ready(function () {
     });
 
     uploader.on('uploadAccept', function (object, ret) {
-        
+        $('#' + file.id).text(ret._raw);
     });
 });
