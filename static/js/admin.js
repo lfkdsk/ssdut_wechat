@@ -65,6 +65,7 @@ $(document).ready(function () {
                 encode_data.istrue = false;
                 new_content = editor.append.getValue();
                 new_title = $('#add-title').val();
+                encode_data.content = {};
                 console.log(new_title);
                 console.log(new_content);
                 if (!new_content || !new_title) {
