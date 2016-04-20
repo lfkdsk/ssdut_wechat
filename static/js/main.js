@@ -60,10 +60,10 @@ $(document).ready(function () {
 
                     loadPage(start_dir + 'index.html');
 
-                    function loadContent (dir, route) {
-                        $('.sec-content').load(dir + route + '.html');
-                        former_route = dir + route + '.html';
-                    }
+                    // function loadContent (dir, route) {
+                    //     $('.sec-content').load(dir + route + '.html');
+                    //     former_route = dir + route + '.html';
+                    // }
 
                     $('.sec-back').on('click', function () {
                         var page = page_stack.pop(),
@@ -73,11 +73,11 @@ $(document).ready(function () {
                         if (data === 'index') {
                             $('body').load(start_dir + 'main.html', initPage);
                         } else {
-                            loadContent(start_dir + 'content/', data);
+                            //loadContent(start_dir + 'content/', data);
                         }
                     });
 
-                    loadContent(dir, route);
+                    // loadContent(dir, route);
 
                     // 跳转
                     var $content_menu = $('.sec-footer > li');
@@ -94,7 +94,7 @@ $(document).ready(function () {
                                     if (checkData(data)) {
                                         loadPage(former_route);
                                     }
-                                    loadContent(dir, data);
+                                    // loadContent(dir, data);
                                 }
                             });
                         });
