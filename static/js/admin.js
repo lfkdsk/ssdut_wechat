@@ -46,7 +46,7 @@ $(document).ready(function () {
             if (!new_content || !new_title) {
                 return false;
             }
-
+            // encode_data.content = {}
             // 只有update事件才去查找
             if (type === 'update') {
                 for (i in data) {
@@ -56,6 +56,9 @@ $(document).ready(function () {
                         }
                     }
                 }
+            }
+            else {
+                encode_data.content = {};
             }
 
             encode_data.istrue = false;
@@ -99,6 +102,7 @@ $(document).ready(function () {
                 break;
 
             case 'add':
+
                 if (!updateAndAdd()) {
                     return;
                 }
