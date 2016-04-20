@@ -3,9 +3,9 @@
  */
 $(document).ready(function () {
 
-    var start_dir = '', // 起始路由
-        former_route = '', // 之前访问路由
-        page_stack = []; // 页面历史栈
+    var start_dir = ''; // 起始路由
+        // former_route = '', // 之前访问路由
+        // page_stack = []; // 页面历史栈
 
     $('body').load(start_dir + 'main.html', function () {
 
@@ -48,120 +48,120 @@ $(document).ready(function () {
          * 载入页面历史列表
          * @param element - 上一次访问的页面
          */
-        function loadPage (element) {
-            if (page_stack[length - 1] == element) {
-                return;
-            }
-            if (page_stack.length >= 20) {
-                page_stack.shift();
-            }
-            page_stack.push(element);
-        }
+        // function loadPage (element) {
+        //     if (page_stack[length - 1] == element) {
+        //         return;
+        //     }
+        //     if (page_stack.length >= 20) {
+        //         page_stack.shift();
+        //     }
+        //     page_stack.push(element);
+        // }
 
         /**
          * 检查数据合法性，不在同页面里进行二次载入
          * @param data - 要跳转的页面
          * @returns {boolean} - true: 进行跳转
          */
-        function checkData(data) {
-            var now_data = former_route.split('/')
-                .pop();
-                //.replace('.html', '');
-
-            return data !== now_data;
-        }
+        // function checkData(data) {
+        //     var now_data = former_route.split('/')
+        //         .pop();
+        //         //.replace('.html', '');
+        //
+        //     return data !== now_data;
+        // }
 
         /**
          * 绑定内容页面菜单事件
          * @param value - key
          * @param element - 元素
          */
-        function menuEvent (value, element) {
-            element.addEventListener('click', function () {
-                var route = element.dataset.goTo;
-                var dir = start_dir + 'content/'; //    挂上服务器要改
-                $('body').load(dir + 'content.html', function () {
-
-                    loadPage(start_dir + 'index');
-
-                    // function loadContent (dir, route) {
-                    //     $('.sec-content').load(dir + route);
-                    //     former_route = dir + route;
-                    // }
-
-                    $('.sec-back').on('click', function () {
-                        var page = page_stack.pop(),
-
-                            // 之前路由
-                            data = page.split('/')
-                            .pop();
-                            // .replace('.html', '');
-                        if (data === 'index') {
-                            $('body').load(start_dir + 'main.html', initPage);
-                        } else {
-                            $.post(data);
-                        }
-                    });
-                    former_route = dir + route; //+ '.html';
-                    // loadContent(dir, route);
-                    $.post(route);
-                    // 跳转
-                    var $content_menu = $('.sec-footer > li');
-                    $content_menu
-                        .filter(function (value, element) {
-                            return element.dataset.goTo;
-                        })
-                        .each(function (value, element) {
-                            element.addEventListener('click', function () {
-                                var data = element.dataset.goTo;
-                                if (data === 'index') {
-                                    $('body').load(start_dir + 'main.html', initPage);
-                                } else {
-                                    if (checkData(data)) {
-                                        loadPage(former_route);
-                                        former_route = dir + route;// + '.html';
-                                        $.post(data);
-                                    }
-                                    // loadContent(dir, data);
-
-                                }
-                            });
-                        });
-
-                            // 延展菜单
-                    $content_menu
-                        .filter(function (value, element) {
-                        return element.dataset.goTo === '';
-                    })
-                        .each(function (value, element) {
-                        var $element = $(element);
-
-                        element.addEventListener('click', function () {
-                            $element.toggleClass('item-active');
-                            $element
-                                .find('.footer-extend')
-                                .toggleClass('show-extend');
-                        });
-
-                        $element
-                            .find('.footer-extend li')
-                            .each(function (value, element) {
-                                var data = element.dataset.goTo;
-                                element.addEventListener('click', function () {
-                                    if (checkData(data)) {
-                                        loadPage(former_route);
-                                        former_route = dir + route;
-                                        $.post(data);
-                                    }
-                                    // loadContent(dir, data);
-
-                                });
-                            });
-                        });
-
-                });
-            });
-        }
+        // function menuEvent (value, element) {
+        //     element.addEventListener('click', function () {
+        //         var route = element.dataset.goTo;
+        //         var dir = start_dir + 'content/'; //    挂上服务器要改
+        //         $('body').load(dir + 'content.html', function () {
+        //
+        //             loadPage(start_dir + 'index');
+        //
+        //             // function loadContent (dir, route) {
+        //             //     $('.sec-content').load(dir + route);
+        //             //     former_route = dir + route;
+        //             // }
+        //
+        //             $('.sec-back').on('click', function () {
+        //                 var page = page_stack.pop(),
+        //
+        //                     // 之前路由
+        //                     data = page.split('/')
+        //                     .pop();
+        //                     // .replace('.html', '');
+        //                 if (data === 'index') {
+        //                     $('body').load(start_dir + 'main.html', initPage);
+        //                 } else {
+        //                     $.post(data);
+        //                 }
+        //             });
+        //             former_route = dir + route; //+ '.html';
+        //             // loadContent(dir, route);
+        //             $.post(route);
+        //             // 跳转
+        //             var $content_menu = $('.sec-footer > li');
+        //             $content_menu
+        //                 .filter(function (value, element) {
+        //                     return element.dataset.goTo;
+        //                 })
+        //                 .each(function (value, element) {
+        //                     element.addEventListener('click', function () {
+        //                         var data = element.dataset.goTo;
+        //                         if (data === 'index') {
+        //                             $('body').load(start_dir + 'main.html', initPage);
+        //                         } else {
+        //                             if (checkData(data)) {
+        //                                 loadPage(former_route);
+        //                                 former_route = dir + route;// + '.html';
+        //                                 $.post(data);
+        //                             }
+        //                             // loadContent(dir, data);
+        //
+        //                         }
+        //                     });
+        //                 });
+        //
+        //                     // 延展菜单
+        //             $content_menu
+        //                 .filter(function (value, element) {
+        //                 return element.dataset.goTo === '';
+        //             })
+        //                 .each(function (value, element) {
+        //                 var $element = $(element);
+        //
+        //                 element.addEventListener('click', function () {
+        //                     $element.toggleClass('item-active');
+        //                     $element
+        //                         .find('.footer-extend')
+        //                         .toggleClass('show-extend');
+        //                 });
+        //
+        //                 $element
+        //                     .find('.footer-extend li')
+        //                     .each(function (value, element) {
+        //                         var data = element.dataset.goTo;
+        //                         element.addEventListener('click', function () {
+        //                             if (checkData(data)) {
+        //                                 loadPage(former_route);
+        //                                 former_route = dir + route;
+        //                                 $.post(data);
+        //                             }
+        //                             // loadContent(dir, data);
+        //
+        //                         });
+        //                     });
+        //                 });
+        //
+        //         });
+        //     });
+        // }
 
         /**
          * 初始化页面元素
@@ -174,7 +174,7 @@ $(document).ready(function () {
                 height: $window.height()
             };
 
-            if (checkLengthWidthRatio()) {
+            if (checkLengthWidthRatio() && $list) {
                 var former_list_height = parseInt($list.css('height').replace('px', '')),
                     later_list_height = screen.height - (screen.width / image_length_width_ratio),
                     former_padding = parseInt($list.css('padding-top').replace('px', '')),
@@ -183,7 +183,7 @@ $(document).ready(function () {
             }
             resetHeight($window, $list);
 
-            $list.find('li').each(menuEvent);
+            // $list.find('li').each(menuEvent);
         }
 
 
@@ -193,6 +193,25 @@ $(document).ready(function () {
             screen; // 屏幕宽高
         initPage();
 
+
+        var $content_menu = $('.sec-footer > li');
+
+        if ($content_menu) {
+            $content_menu
+                .filter(function (value, element) {
+                    return element.dataset.goTo === '';
+                })
+                .each(function (value, element) {
+                    var $element = $(element);
+
+                    element.addEventListener('click', function () {
+                        $element.toggleClass('item-active');
+                        $element
+                            .find('.footer-extend')
+                            .toggleClass('show-extend');
+                    });
+                });
+        }
         /**
          * 页面可视区域长宽变化
          */
