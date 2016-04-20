@@ -46,6 +46,8 @@ $(document).ready(function () {
             if (!new_content || !new_title) {
                 return false;
             }
+
+            // 只有update事件才去查找
             if (type === 'update') {
                 for (i in data) {
                     if (data.hasOwnProperty(i)) {
@@ -55,12 +57,13 @@ $(document).ready(function () {
                     }
                 }
             }
+
             encode_data.istrue = false;
             encode_data.content.Type = page_type;
             encode_data.content.Content = '<h3>' + new_title + '</h3>' + new_content;
             encode_data.content.Modifytime = date.getFullYear().toString() + '-'
-                + date.getMonth() + '-'
-                + date.getDay();
+                + date.getMonth().toString() + '-'
+                + date.getDay().toString();
             encode_data.content = JSON.stringify(encode_data.content);
             return true;
         }
