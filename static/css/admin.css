@@ -116,7 +116,7 @@ nav i:hover {
     width: 500px;
     height: auto;
     border: dashed 3px #666666;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 .picker-button {
@@ -144,4 +144,7 @@ nav i:hover {
     color: #686868;
 }
 
+#add-button {
+    margin: 20px auto;
+}
 

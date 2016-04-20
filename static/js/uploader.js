@@ -51,10 +51,10 @@ $(document).ready(function () {
             $percent = $('<div class="row"><div class="col-md-1"></div>'
                 + '<div class="col-md-9"><div class="progress progress-striped active">'
                 + '<div class="progress-bar" role="progressbar" style="width:0%;">'
-                + '</div>' + '</div></div></div>').appendTo($li).find('.progress-bar');
+                + '</div>' + '</div></div></div>').appendTo($li);//.find('.progress-bar');
         }
 
-        $li.find('span.state').text('上传中');
+        // $li.find('#' + file.id).text('上传中');
 
         $percent.css('width', percentage * 100 + '%');
     });
@@ -69,7 +69,7 @@ $(document).ready(function () {
     });
 
     uploader.on('uploadComplete', function (file) {
-        $('#' + file.id).fadeOut();
+        // $('#' + file.id).fadeOut();
     });
 
     uploader.on('uploadAccept', function (object, ret) {
