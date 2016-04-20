@@ -96,9 +96,11 @@ func (this *ContentController)ExeCode() {
 			return_code(e, this);
 			break
 		}
-		if request.Form["code"][0] == "1" {
-			models.SetItemTrue(&content_temp);
-		}
+		//if request.Form["code"][0] == "1" {
+		//	models.SetItemTrue(&content_temp);
+		//}
+	}else {
+		this.Ctx.WriteString("页面过期");
 	}
 	return
 }

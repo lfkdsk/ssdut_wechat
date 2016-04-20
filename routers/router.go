@@ -16,6 +16,10 @@ func init() {
 	beego.Router("/content/?:id",
 		&controllers.ContentController{},
 		"*:Content");
+	//beego.Router("/upload/?:id",
+	//	&controllers.UploadControllers{},
+	//	"get:GetPic");
+
 	beego.Router("/admin/tokenget",
 		&controllers.ContentController{},
 		"post:TokenGet");
@@ -31,9 +35,9 @@ func init() {
 		&controllers.LoginController{},
 		"*:Admin_Index");
 
-	beego.Router("/upload",
-		&controllers.UploadControllers{},
-		"*:UpLoad");
+	//beego.Router("/upload",
+	//	&controllers.UploadControllers{},
+	//	"*:UpLoad");
 
 	beego.Router("/uploadfile",
 		&controllers.UploadControllers{},
@@ -47,9 +51,9 @@ func init() {
 		&controllers.ContentController{},
 		"post:ExeCode");
 
-	beego.Router("/getfiletoken",
-		&controllers.UploadControllers{},
-		"get:GetFileToken");
+	//beego.Router("/getfiletoken",
+	//	&controllers.UploadControllers{},
+	//	"get:GetFileToken");
 
 
 }
