@@ -15,7 +15,7 @@ type ContentController struct {
 
 func (c *ContentController)Content() {
 	//c.TplName = "content/" + c.Ctx.Input.Param(":id");
-	fmt.Println(c.Ctx.Input.Param(":id"));
+	//fmt.Println(c.Ctx.Input.Param(":id"));
 	if c.Ctx.Input.Param(":id") != "content.html" {
 		c.Data["Content"] = models.GetContentTrueItem(c.Ctx.Input.Param(":id"))[0].Content;
 		c.TplName = "content/content.html"
