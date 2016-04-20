@@ -9,10 +9,10 @@ $(document).ready(function () {
 
     $('body').load(start_dir + 'main.html', function () {
 
-        function resetHeight (windows, list) {
+        function resetHeight(windows, list) {
             var element = {
-                    list : list,
-                    carousel : $('#carousel-generic')
+                    list: list,
+                    carousel: $('#carousel-generic')
                 },
                 height = {};
             Object.keys(element)
@@ -26,7 +26,7 @@ $(document).ready(function () {
                         height[value] = element[value].get(0).clientHeight;
                     }
                 });
-            element.carousel.css('height', height.carousel+ 'px');
+            element.carousel.css('height', height.carousel + 'px');
         }
 
         function checkLengthWidthRatio() {
@@ -34,7 +34,7 @@ $(document).ready(function () {
             return screen.width / (screen.height - list_height) < image_length_width_ratio;
         }
 
-        function loadPage (element) {
+        function loadPage(element) {
             if (page_stack[length - 1] == element) {
                 return;
             }
@@ -52,11 +52,11 @@ $(document).ready(function () {
             return data !== now_data;
         }
 
-        function menuEvent (value, element) {
+        function menuEvent(value, element) {
             element.addEventListener('click', function () {
                 var route = element.dataset.goTo;
                 var dir = start_dir + 'content/'; //    挂上服务器要改
-                $('body').load(dir + 'content.html', function () {
+                $('body').load(dir + route, function () {
 
                     loadPage(start_dir + 'index.html');
 
@@ -68,8 +68,8 @@ $(document).ready(function () {
                     $('.sec-back').on('click', function () {
                         var page = page_stack.pop(),
                             data = page.split('/')
-                            .pop()
-                            .replace('.html', '');
+                                .pop()
+                                .replace('.html', '');
                         if (data === 'index') {
                             $('body').load(start_dir + 'main.html', initPage);
                         } else {
@@ -99,39 +99,39 @@ $(document).ready(function () {
                             });
                         });
 
-                            // 延展菜单
+                    // 延展菜单
                     $content_menu
                         .filter(function (value, element) {
-                        return element.dataset.goTo === '';
-                    })
+                            return element.dataset.goTo === '';
+                        })
                         .each(function (value, element) {
-                        var $element = $(element);
+                            var $element = $(element);
 
-                        element.addEventListener('click', function () {
-                            $element.toggleClass('item-active');
-                            $element
-                                .find('.footer-extend')
-                                .toggleClass('show-extend');
-                        });
-
-                        $element
-                            .find('.footer-extend li')
-                            .each(function (value, element) {
-                                var data = element.dataset.goTo;
-                                element.addEventListener('click', function () {
-                                    if (checkData(data)) {
-                                        loadPage(former_route);
-                                    }
-                                    loadContent(dir, data);
-                                });
+                            element.addEventListener('click', function () {
+                                $element.toggleClass('item-active');
+                                $element
+                                    .find('.footer-extend')
+                                    .toggleClass('show-extend');
                             });
+
+                            $element
+                                .find('.footer-extend li')
+                                .each(function (value, element) {
+                                    var data = element.dataset.goTo;
+                                    element.addEventListener('click', function () {
+                                        if (checkData(data)) {
+                                            loadPage(former_route);
+                                        }
+                                        //loadContent(dir, data);
+                                    });
+                                });
                         });
 
                 });
             });
         }
 
-        function initPage () {
+        function initPage() {
             $window = $(window);
             $list = $('.list');
             screen = {

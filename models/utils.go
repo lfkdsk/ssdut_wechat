@@ -28,7 +28,20 @@ func GetContentItem(typename string) []Content {
 	if err != nil {
 		fmt.Println("error in qs" + typename);
 		return nil;
-	}else {
+	} else {
+		fmt.Println(num);
+		return contents;
+	}
+}
+
+func GetContentTrueItem(typename string) []Content {
+	o := orm.NewOrm();
+	var contents []Content;
+	num, err := o.QueryTable("Content").Filter("Type", typename).Filter("Istrue", 1).All(&contents);
+	if err != nil {
+		fmt.Println("error in qs" + typename);
+		return nil;
+	} else {
 		fmt.Println(num);
 		return contents;
 	}
@@ -61,7 +74,7 @@ func SetItemTrue(content *Content) (int64, error) {
 	num, err := o.QueryTable("Content").Filter("Type", content.Type).Update(orm.Params{"Istrue":0});
 	if err != nil {
 		return getError(num, err);
-	}else {
+	} else {
 		content.Istrue = 1;
 		number, errol := UpdateContentItem(content);
 		return getError(number, errol);
@@ -72,7 +85,7 @@ func getError(num int64, err error) (int64, error) {
 	if err != nil {
 		fmt.Println(err);
 		return 0, err;
-	}else {
+	} else {
 		fmt.Println(string(num));
 		return num, nil;
 	}
