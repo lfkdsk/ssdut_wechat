@@ -14,7 +14,15 @@ type ContentController struct {
 }
 
 func (c *ContentController)Content() {
-	c.TplName = "content/" + c.Ctx.Input.Param(":id");
+	//c.TplName = "content/" + c.Ctx.Input.Param(":id");
+	//fmt.Println(c.Ctx.Input.Param(":id"));
+	if c.Ctx.Input.Param(":id") != "content.html" {
+		c.Data["Content"] = models.GetContentTrueItem(c.Ctx.Input.Param(":id"))[0].Content;
+		c.TplName = "content/content.html"
+	}else {
+		c.TplName = "content/content.html"
+	}
+	return
 }
 
 func (c *ContentController)Get() {
@@ -99,7 +107,7 @@ func (this *ContentController)ExeCode() {
 		//if request.Form["code"][0] == "1" {
 		//	models.SetItemTrue(&content_temp);
 		//}
-	}else {
+	} else {
 		this.Ctx.WriteString("页面过期");
 	}
 	return
@@ -124,7 +132,7 @@ func (this *LoginController)Admin_Index() {
 	if user_sess != nil {
 		this.TplName = "admin/index.html";
 		return
-	}else {
+	} else {
 		this.Ctx.Redirect(302, "/admin/login");
 		return
 	}
@@ -151,7 +159,7 @@ func (this *LoginController)Jump() {
 		fmt.Println("cannot find him");
 		this.Ctx.WriteString("fuck find");
 		return
-	}else {
+	} else {
 		token, _ := msg.Get("token").String();
 		psw, _ := msg.Get("password").String();
 
@@ -181,7 +189,7 @@ func fuck_error(error_name string, e error) {
 func return_code(e error, this *ContentController) {
 	if e != nil {
 		this.Ctx.WriteString(`{"msg"="0"}`);
-	}else {
+	} else {
 		this.Ctx.WriteString(`{"msg"="1"}`);
 	}
 }
