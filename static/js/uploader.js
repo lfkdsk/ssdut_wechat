@@ -70,6 +70,8 @@ $(document).ready(function () {
 
     uploader.on('uploadComplete', function (file) {
         // $('#' + file.id).fadeOut();
+
+        
     });
 
     uploader.on('uploadAccept', function (object, ret) {
