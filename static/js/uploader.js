@@ -28,10 +28,11 @@ $(document).ready(function () {
 
     // 当有文件添加进来的时候
     uploader.on('fileQueued', function (file) {
+        console.log(file);
         temp = file.id;
         $list.append('<tr>'
-            + '<td>file.name</td>'
-            + '<td>file.size</td>'
+            + '<td>' + file.name + '</td>'
+            + '<td>' + file.size + '</td>'
             + '<td id="' + file.id + '">等待上传...</td>'
             + '</tr>>');
         // $list.append('<div id="' + file.id + '" class="item">' +
