@@ -94,7 +94,7 @@ $(document).ready(function () {
                                     if (checkData(data)) {
                                         loadPage(former_route);
                                     }
-                                    loadContent(dir, data);
+                                    // loadContent(dir, data);
                                 }
                             });
                         });
