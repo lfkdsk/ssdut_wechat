@@ -60,7 +60,7 @@ $(document).ready(function () {
     });
 
     uploader.on('uploadSuccess', function (file) {
-        $('#' + file.id).text('已上传');
+        // $('#' + file.id).text('已上传');
         temp = file.id;
     });
 
@@ -69,12 +69,10 @@ $(document).ready(function () {
     });
 
     uploader.on('uploadComplete', function (file) {
-        // $('#' + file.id).fadeOut();
-
-        
+        temp = file.id;
     });
 
     uploader.on('uploadAccept', function (object, ret) {
-        $('#' + file.id).text(ret._raw);
+        $('#' + temp).text(ret._raw.toString());
     });
 });
