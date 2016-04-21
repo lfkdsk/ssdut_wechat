@@ -3,46 +3,13 @@
  */
 $(document).ready(function () {
 
-    var start_dir = ''; // 起始路由
+    // var start_dir = ''; // 起始路由
         // former_route = '', // 之前访问路由
         // page_stack = []; // 页面历史栈
 
-    $('body').load(start_dir + 'main.html', function () {
-
-        /**
-         * 设置高度
-         * @param windows - $(window);
-         * @param list - $('.list')
-         */
-        function resetHeight (windows, list) {
-            var element = {
-                    list : list,
-                    carousel : $('#carousel-generic')
-                },
-                height = {};
-            Object.keys(element)
-                .filter(function (value) {
-                    return value !== 'screen'
-                })
-                .forEach(function (value) {
-                    if (value === 'carousel') {
-                        height[value] = windows.height() - height.list;
-                    } else {
-                        height[value] = element[value].get(0).clientHeight;
-                    }
-                });
-            element.carousel.css('height', height.carousel+ 'px');
-        }
+    // $('body').load(start_dir + 'main.html', function () {
 
 
-        /**
-         * 检查长宽比
-         * @returns {boolean} - false :符合要求长宽比，list不需要改变高度
-         */
-        function checkLengthWidthRatio() {
-            var list_height = $list.get(0).clientHeight;
-            return screen.width / (screen.height - list_height) < image_length_width_ratio;
-        }
 
         /**
          * 载入页面历史列表
@@ -163,6 +130,43 @@ $(document).ready(function () {
         //     });
         // }
 
+
+    /**
+     * 设置高度
+     * @param windows - $(window);
+     * @param list - $('.list')
+     */
+    function resetHeight (windows, list) {
+        var element = {
+                list : list,
+                carousel : $('#carousel-generic')
+            },
+            height = {};
+        Object.keys(element)
+            .filter(function (value) {
+                return value !== 'screen'
+            })
+            .forEach(function (value) {
+                if (value === 'carousel') {
+                    height[value] = windows.height() - height.list;
+                } else {
+                    height[value] = element[value].get(0).clientHeight;
+                }
+            });
+        element.carousel.css('height', height.carousel+ 'px');
+    }
+
+
+    /**
+     * 检查长宽比
+     * @returns {boolean} - false :符合要求长宽比，list不需要改变高度
+     */
+    function checkLengthWidthRatio() {
+        var list_height = $list.get(0).clientHeight;
+        return screen.width / (screen.height - list_height) < image_length_width_ratio;
+    }
+
+
         /**
          * 初始化页面元素
          */
@@ -219,6 +223,6 @@ $(document).ready(function () {
             resetHeight($window, $list);
         });
 
-    });
+    // });
 
 });
