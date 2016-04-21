@@ -7,6 +7,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/bitly/go-simplejson"
 	"encoding/json"
+	"strings"
 )
 
 type ContentController struct {
@@ -14,19 +15,17 @@ type ContentController struct {
 }
 
 func (c *ContentController)Content() {
-	//c.TplName = "content/" + c.Ctx.Input.Param(":id");
-	//fmt.Println(c.Ctx.Input.Param(":id"));
 	if c.Ctx.Input.Param(":id") != "content.html" {
 		c.Data["Content"] = models.GetContentTrueItem(c.Ctx.Input.Param(":id"))[0].Content;
 		c.TplName = "content/content.html"
-	}else {
+	} else {
 		c.TplName = "content/content.html"
 	}
 	return
 }
 
 func (c *ContentController)Get() {
-	c.TplName = "index.html";
+	c.TplName = "main.html";
 }
 
 func (this *ContentController)TokenGet() {
@@ -46,7 +45,7 @@ func (this *ContentController)GetHistory() {
 	request := this.Ctx.Request;
 	request.ParseForm();
 
-	user_sess := this.GetSession(request.RemoteAddr);
+	user_sess := this.GetSession(strings.Split(request.RemoteAddr, "]")[0]);
 
 	if user_sess != nil {
 		label_name := request.Form["label"][0];
@@ -77,7 +76,7 @@ func (this *ContentController)ExeCode() {
 	request := this.Ctx.Request;
 	request.ParseForm();
 
-	user_sess := this.GetSession(request.RemoteAddr);
+	user_sess := this.GetSession(strings.Split(request.RemoteAddr, "]")[0]);
 	if user_sess != nil {
 		fmt.Println(request.Body);
 		// get label
@@ -125,9 +124,7 @@ func (this *LoginController)Admin_Index() {
 	request := this.Ctx.Request;
 	request.ParseForm();
 
-	user_sess := this.GetSession(request.RemoteAddr);
-
-	fmt.Println(request.RemoteAddr);
+	user_sess := this.GetSession(strings.Split(request.RemoteAddr, "]")[0]);
 
 	if user_sess != nil {
 		this.TplName = "admin/index.html";
@@ -166,7 +163,8 @@ func (this *LoginController)Jump() {
 		fmt.Println(token)
 
 		if (user.Psw == psw && token == models.Bm.Get(username)) {
-			this.SetSession(request.RemoteAddr, models.GetSessionNum(username));
+			fmt.Println(strings.Split(request.RemoteAddr, "]")[0]);
+			this.SetSession(strings.Split(request.RemoteAddr, "]")[0], models.GetSessionNum(username));
 			this.Ctx.WriteString("1");
 			this.Ctx.Redirect(302, "/admin/index");
 			return
