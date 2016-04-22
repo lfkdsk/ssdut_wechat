@@ -44,8 +44,9 @@ func (this *ContentController)TokenGet() {
 func (this *ContentController)GetHistory() {
 	request := this.Ctx.Request;
 	request.ParseForm();
+	this.TplName = "admin/gethistory.html";
 
-	user_sess := this.GetSession(strings.Split(request.RemoteAddr, "]")[0]);
+	user_sess := this.GetSession(strings.Split(request.RemoteAddr, ":")[0]);
 
 	if user_sess != nil {
 		label_name := request.Form["label"][0];
@@ -76,7 +77,9 @@ func (this *ContentController)ExeCode() {
 	request := this.Ctx.Request;
 	request.ParseForm();
 
-	user_sess := this.GetSession(strings.Split(request.RemoteAddr, "]")[0]);
+	this.TplName = "admin/gethistory.html";
+
+	user_sess := this.GetSession(strings.Split(request.RemoteAddr, ":")[0]);
 	if user_sess != nil {
 		fmt.Println(request.Body);
 		// get label
@@ -103,9 +106,6 @@ func (this *ContentController)ExeCode() {
 			return_code(e, this);
 			break
 		}
-		//if request.Form["code"][0] == "1" {
-		//	models.SetItemTrue(&content_temp);
-		//}
 	} else {
 		this.Ctx.WriteString("页面过期");
 	}
@@ -124,7 +124,7 @@ func (this *LoginController)Admin_Index() {
 	request := this.Ctx.Request;
 	request.ParseForm();
 
-	user_sess := this.GetSession(strings.Split(request.RemoteAddr, "]")[0]);
+	user_sess := this.GetSession(strings.Split(request.RemoteAddr, ":")[0]);
 
 	if user_sess != nil {
 		this.TplName = "admin/index.html";
@@ -162,8 +162,8 @@ func (this *LoginController)Jump() {
 		fmt.Println(psw);
 
 		if (user.Psw == psw && token == models.Bm.Get(username)) {
-			fmt.Println(strings.Split(request.RemoteAddr, "]")[0]);
-			this.SetSession(strings.Split(request.RemoteAddr, "]")[0], models.GetSessionNum(username));
+			fmt.Println(strings.Split(request.RemoteAddr, ":")[0]);
+			this.SetSession(strings.Split(request.RemoteAddr, ":")[0], models.GetSessionNum(username));
 			this.Ctx.WriteString("1");
 			this.Ctx.Redirect(302, "/admin/index");
 			return

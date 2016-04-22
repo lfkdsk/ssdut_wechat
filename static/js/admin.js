@@ -146,6 +146,7 @@ $(document).ready(function () {
                 $('#update-title').val('');
                 $('#add-title').val('');
                 alert('成功了！！！！');
+                $('#update-article').modal('hide');
                 getHistory();
             }
         });
