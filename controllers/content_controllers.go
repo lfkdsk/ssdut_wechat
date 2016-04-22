@@ -149,10 +149,9 @@ func (this *LoginController)Jump() {
 	username, username_error := msg.Get("username").String();
 	fuck_error("username_error", username_error);
 
-	user := models.User{Name:username};
-	err := o.Read(&user, "Name");
-
-	if err == orm.ErrNoRows {
+	var user models.User;
+	err := o.QueryTable("User").Filter("name", username).One(&user);
+	if err != nil {
 		fmt.Println("cannot find him");
 		this.Ctx.WriteString("fuck find");
 		return
@@ -160,7 +159,7 @@ func (this *LoginController)Jump() {
 		token, _ := msg.Get("token").String();
 		psw, _ := msg.Get("password").String();
 
-		fmt.Println(token)
+		fmt.Println(psw);
 
 		if (user.Psw == psw && token == models.Bm.Get(username)) {
 			fmt.Println(strings.Split(request.RemoteAddr, "]")[0]);
