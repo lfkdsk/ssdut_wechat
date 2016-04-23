@@ -33,12 +33,14 @@ $(document).ready(function () {
         });
     };
     
-    Container.prototype.clearData = function () {
+    Container.prototype.clearData = function (arr) {
         var $input = this.container.find('input');
-        $input.each(function (value, element) {
-            if (element.type !== 'button') {
+        $input.filter(function (index) {
+            return $(this).attr('type') !== 'button' &&
+                    arr.indexOf($(this).attr('id')) === -1;
+        })
+            .each(function (value, element) {
                 element.value = '';
-            }
         });
     };
     
@@ -49,7 +51,6 @@ $(document).ready(function () {
     var VALID_SIGN = /^([a-z]|[A-Z]|[0-9]|_){1,20}$/;
     $button.click(function (event) {
         event.preventDefault();
-        console.log($form);
         var container = new Container($form);
         var data = {
             username: $form.find('#username').val(),
@@ -61,25 +62,23 @@ $(document).ready(function () {
         if (data.new_password !== data.verify_password || !VALID_SIGN.test(data.username) || data.new_password.length < 6) {
             $warning.addClass('show');
             container.removeDisable();
+            container.clearData(['username']);
             return;
         }
         
         delete data.verify_password;
-        
-        // data.new_password = md5(data.new_password);
-        // data.old_password = md5(data.old_password);
         $.ajax({
             url: '',
             type: 'POST',
-            data: data,
+            data: JSON.stringify(data),
             success: function (response) {
-                container.clearData();
+                container.clearData(['all']);
                 container.removeDisable();
             },
             error: function (error) {
-                console.log(error);
                 $warning.addClass('show');
                 container.removeDisable();
+                alert('修改成功！');
             }
         })
     })
