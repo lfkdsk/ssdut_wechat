@@ -387,7 +387,7 @@ $(document).ready(function () {
         })
     };
 
-    const TITLE_REGEX = /<h3>.*<\/h3>/;
+    var TITLE_REGEX = /<h3>.*<\/h3>/;
 
     var page_type = $('ul.nav-sidebar li.active').find('a').get(0).dataset.goTo,
         $element = {},
