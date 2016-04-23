@@ -36,7 +36,9 @@ $(document).ready(function () {
     Container.prototype.clearData = function () {
         var $input = this.container.find('input');
         $input.each(function (value, element) {
-            element.value = '';
+            if (element.type !== 'button') {
+                element.value = '';
+            }
         });
     };
     
@@ -71,7 +73,6 @@ $(document).ready(function () {
             type: 'POST',
             data: data,
             success: function (response) {
-                
                 container.clearData();
                 container.removeDisable();
             },
