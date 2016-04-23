@@ -2,8 +2,8 @@
  * Created by Administrator on 2016/4/22.
  */
 $(document).ready(function () {
-    
-    function Container (container) {
+
+    function Container(container) {
         this.container = container;
     }
 
@@ -32,19 +32,19 @@ $(document).ready(function () {
             element.removeAttribute('disabled');
         });
     };
-    
+
     Container.prototype.clearData = function (arr) {
         var $input = this.container.find('input');
         $input.filter(function (index) {
-            return $(this).attr('type') !== 'button' &&
+                return $(this).attr('type') !== 'button' &&
                     arr.indexOf($(this).attr('id')) === -1;
-        })
+            })
             .each(function (value, element) {
                 element.value = '';
-        });
+            });
     };
-    
-    
+
+
     var $form = $('form');
     var $button = $('#submit');
     var $warning = $('p.bg-danger');
@@ -65,12 +65,13 @@ $(document).ready(function () {
             container.clearData(['username']);
             return;
         }
-        
+
         delete data.verify_password;
         $.ajax({
-            url: '',
+            url: '/cpsw',
             type: 'POST',
-            data: JSON.stringify(data),
+            data: {cpsw: JSON.stringify(data)},
+
             success: function (response) {
                 container.clearData(['all']);
                 container.removeDisable();

@@ -7,15 +7,17 @@ $(document).ready(function () {
      * 获取历史列表
      */
     function getHistory() {
+        //console.log('history progress');
         $.post('/gethistory', {label: page_type}, function (response) {
-
-
+            // console.log(response);
+            console.log(history_table.hasChildNodes());
             // 清空之前的节点
             while(history_table.hasChildNodes()) {
                 history_table.removeChild(history_table.firstChild);
             }
-
+            // debugger;
             data = JSON.parse(response);
+            console.log(data);
             for (var i = data.length - 1; i >= 0; --i) {
                 new_tr = createNewHistoryList(data[i]);
                 if (data[i].Istrue) {
@@ -367,7 +369,7 @@ $(document).ready(function () {
                 }
             }
         }
-
+        console.log('danger:', $('tr[data-id="' + id + '"]'));
         // 未保存提醒
         $('tr[data-id="' + id + '"]').addClass('.bg-danger');
         console.log(content);
@@ -416,7 +418,9 @@ $(document).ready(function () {
             $former_active.removeClass('active');
             var $this = $(this);
             $this.addClass('active');
-            page_type = $former_active.find('a').get(0).dataset.goTo;
+            page_type = $this.find('a').get(0).dataset.goTo;
+            // console.log(page_type);
+            // console.log('prepare history');
             getHistory();
         })
     });

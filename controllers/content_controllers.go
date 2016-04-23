@@ -14,6 +14,37 @@ type ContentController struct {
 	beego.Controller
 }
 
+func (this *ContentController)ChangePsw() {
+	this.TplName = "change_password.html";
+}
+
+func (this *ContentController)Cpsw() {
+	//request := this.Ctx.Request;
+	//request.ParseForm();
+	this.TplName = "admin/gethistory.html";
+	msg, json_err := simplejson.NewJson(([] byte(this.GetString("cpsw"))));
+	fuck_error("json_error", json_err);
+
+	username, u_err := msg.Get("username").String();
+	fuck_error("username", u_err);
+
+	oldpsw, o_err := msg.Get("old_password").String();
+	fuck_error("old_password", o_err);
+
+	newpsw, n_err := msg.Get("new_password").String();
+	fuck_error("new_password", n_err);
+
+	user := models.GetUserItem(username);
+	if oldpsw != user.Psw {
+		return
+	} else {
+		user.Psw = newpsw;
+		fmt.Println(user.Psw)
+		models.UpdateUserItem(&user);
+	}
+	return
+}
+
 func (c *ContentController)Content() {
 	if c.Ctx.Input.Param(":id") != "content.html" {
 		c.Data["Content"] = models.GetContentTrueItem(c.Ctx.Input.Param(":id"))[0].Content;
@@ -52,7 +83,7 @@ func (this *ContentController)GetHistory() {
 		label_name := request.Form["label"][0];
 		contents := models.GetContentItem(label_name);
 		res, err := json.Marshal(contents);
-		fuck_error("gethistory", err);
+		fuck_error("get history", err);
 		this.Ctx.WriteString(string(res));
 	}
 	return

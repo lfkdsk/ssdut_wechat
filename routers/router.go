@@ -30,10 +30,6 @@ func init() {
 		&controllers.LoginController{},
 		"*:Admin_Index");
 
-	//beego.Router("/upload",
-	//	&controllers.UploadControllers{},
-	//	"*:UpLoad");
-
 	beego.Router("/uploadfile",
 		&controllers.UploadControllers{},
 		"post:GetUploadFile")
@@ -45,5 +41,13 @@ func init() {
 	beego.Router("/execode",
 		&controllers.ContentController{},
 		"post:ExeCode");
+
+	beego.Router("/changepsw",
+		&controllers.ContentController{},
+		"get:ChangePsw");
+
+	beego.Router("/cpsw",
+		&controllers.ContentController{},
+		"post:Cpsw");
 
 }

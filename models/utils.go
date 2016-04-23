@@ -47,6 +47,28 @@ func GetContentTrueItem(typename string) []Content {
 	}
 }
 
+func GetUserItem(username string) User {
+	o := orm.NewOrm();
+	var user User;
+	err := o.QueryTable("User").Filter("Name", username).One(&user);
+	fmt.Println(user.Id);
+	fmt.Println(err)
+	return user;
+}
+
+func UpdateUserItem(user *User) (int64, error) {
+	o := orm.NewOrm();
+	num, err := o.QueryTable("User").Filter("Name", user.Name).Update(orm.Params{"Psw":user.Psw});
+	return getError(num, err);
+}
+
+func DeleteUserItem(user *User) (int64, error) {
+	o := orm.NewOrm();
+	o.Using("User");
+	num, err := o.Delete(user);
+	return getError(num, err);
+}
+
 func UpdateContentItem(content *Content) (int64, error) {
 	o := orm.NewOrm();
 	o.Using("Content");
