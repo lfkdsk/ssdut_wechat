@@ -78,7 +78,7 @@ $(document).ready(function () {
             host = window.location.host;
         $.post('/admin/tokenget', confirm_token, function (data) {
             value.token = data;
-            value.password = md5(value.password);
+            // value.password = md5(value.password);
             $.ajax({
                 url: '/admin/jump',
                 type: 'POST',

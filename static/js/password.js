@@ -56,7 +56,7 @@ $(document).ready(function () {
             verify_password: $form.find('#verify-password').val()
         };
         container.setDisable();
-        if (data.new_password !== data.verify_password || !VALID_SIGN.test(data.username)) {
+        if (data.new_password !== data.verify_password || !VALID_SIGN.test(data.username) || data.new_password.length < 6) {
             $warning.addClass('show');
             container.removeDisable();
             return;
@@ -64,8 +64,8 @@ $(document).ready(function () {
         
         delete data.verify_password;
         
-        data.new_password = md5(data.new_password);
-        data.old_password = md5(data.old_password);
+        // data.new_password = md5(data.new_password);
+        // data.old_password = md5(data.old_password);
         $.ajax({
             url: '',
             type: 'POST',
